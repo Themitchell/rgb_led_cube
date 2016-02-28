@@ -2360,10 +2360,20 @@ void cardboardBox(int duration, float speedMultiplier = 1.0) {
   }
 }
 
-  clean();
+void setFullColor(byte red, byte green, byte blue) {
+  int ii, jj, kk;
+  for (ii=0; ii < 8; ii++) {
+    for (jj=0; jj < 8; jj++) {
+      for (kk=0; kk < 8; kk++) {
+        setLED(ii, jj, kk, red, green, blue);
+      }
+    }
+  }
 }
 
 void clean() {
+  setFullColor(0, 0, 0);
+}
   int ii, jj, kk;
   for (ii=0; ii < 8; ii++) {
     for (jj=0; jj < 8; jj++) {
