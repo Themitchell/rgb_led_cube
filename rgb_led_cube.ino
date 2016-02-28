@@ -45,11 +45,12 @@ int BAM_Bit, BAM_Counter = 0; // Keeps track of Bit Angle Modulation
 
 unsigned long start; // Millisecond timer to cycle through the animations
 
-const int CUBE_SIZE = 8
+
+const int CUBE_SIZE = 8;
 const int TEMPO = 120; // bpm
 
 int getTempoDelay() {
-  return 60000 / TEMPO ;
+  return 60000 / TEMPO;
 }
 
 void setup() {
@@ -146,7 +147,7 @@ void setLED(int level, int row, int column, byte red, byte green, byte blue) {
   if (blue>15)   blue=15;
 
   // Translate level, row and column 0 to 511
-  int whichbyte = int(((level * 64) + (row * 8) + column) / 8);
+  int whichbyte = int(((level * (CUBE_SIZE * CUBE_SIZE)) + (row * CUBE_SIZE) + column) / CUBE_SIZE);
 
   // The first level LEDs are first in the sequence, then 2nd level, then third,
   // and so on the (level*64) is what indexes the level's starting place, so
@@ -182,24 +183,24 @@ void setLED(int level, int row, int column, byte red, byte green, byte blue) {
 
   // This next variable is the same thing as before, but here we don't divide
   // by 8, so we get the LED number 0-511
-  int wholebyte=(level*64)+(row*8)+column;
+  int wholebyte=(level * (CUBE_SIZE * CUBE_SIZE)) + (row * CUBE_SIZE) + column;
 
   //This is 4 bit color resolution, so each color contains x4 64 byte arrays,
   // explanation below:
-  bitWrite(red0[whichbyte], wholebyte-(8*whichbyte), bitRead(red, 0));
-  bitWrite(red1[whichbyte], wholebyte-(8*whichbyte), bitRead(red, 1));
-  bitWrite(red2[whichbyte], wholebyte-(8*whichbyte), bitRead(red, 2));
-  bitWrite(red3[whichbyte], wholebyte-(8*whichbyte), bitRead(red, 3));
+  bitWrite(red0[whichbyte],   wholebyte - (CUBE_SIZE * whichbyte), bitRead(red,   0));
+  bitWrite(red1[whichbyte],   wholebyte - (CUBE_SIZE * whichbyte), bitRead(red,   1));
+  bitWrite(red2[whichbyte],   wholebyte - (CUBE_SIZE * whichbyte), bitRead(red,   2));
+  bitWrite(red3[whichbyte],   wholebyte - (CUBE_SIZE * whichbyte), bitRead(red,   3));
 
-  bitWrite(green0[whichbyte], wholebyte-(8*whichbyte), bitRead(green, 0));
-  bitWrite(green1[whichbyte], wholebyte-(8*whichbyte), bitRead(green, 1));
-  bitWrite(green2[whichbyte], wholebyte-(8*whichbyte), bitRead(green, 2));
-  bitWrite(green3[whichbyte], wholebyte-(8*whichbyte), bitRead(green, 3));
+  bitWrite(green0[whichbyte], wholebyte - (CUBE_SIZE * whichbyte), bitRead(green, 0));
+  bitWrite(green1[whichbyte], wholebyte - (CUBE_SIZE * whichbyte), bitRead(green, 1));
+  bitWrite(green2[whichbyte], wholebyte - (CUBE_SIZE * whichbyte), bitRead(green, 2));
+  bitWrite(green3[whichbyte], wholebyte - (CUBE_SIZE * whichbyte), bitRead(green, 3));
 
-  bitWrite(blue0[whichbyte], wholebyte-(8*whichbyte), bitRead(blue, 0));
-  bitWrite(blue1[whichbyte], wholebyte-(8*whichbyte), bitRead(blue, 1));
-  bitWrite(blue2[whichbyte], wholebyte-(8*whichbyte), bitRead(blue, 2));
-  bitWrite(blue3[whichbyte], wholebyte-(8*whichbyte), bitRead(blue, 3));
+  bitWrite(blue0[whichbyte],  wholebyte - (CUBE_SIZE * whichbyte), bitRead(blue,  0));
+  bitWrite(blue1[whichbyte],  wholebyte - (CUBE_SIZE * whichbyte), bitRead(blue,  1));
+  bitWrite(blue2[whichbyte],  wholebyte - (CUBE_SIZE * whichbyte), bitRead(blue,  2));
+  bitWrite(blue3[whichbyte],  wholebyte - (CUBE_SIZE * whichbyte), bitRead(blue,  3));
 
   // Are you now more confused?  You shouldn't be!  It's starting to make sense
   // now.  Notice how each line is a bitWrite, which is, bitWrite(the byte you
