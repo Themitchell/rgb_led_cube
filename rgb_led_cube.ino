@@ -2957,32 +2957,35 @@ void drawMansionFace() {
 }
 
 void loop() {
-  // colorWheelVertical(getBeatDivision(16), DIVISOR_4);
-  // clean();
-  // folder(getBeatDivision(16), DIVISOR_16);
-  // clean();
-  // sinewave(getBeatDivision(16), DIVISOR_16);
-  // clean();
-  // colorWheel(getBeatDivision(16), DIVISOR_4);
-  // clean();
-  // outline(getBeatDivision(16), DIVISOR_16);
-  // clean();
-  // snake(getBeatDivision(32), DIVISOR_16);
-  // clean();
-  // upDownArrows(getBeatDivision(32), DIVISOR_64);
-  // clean();
-  // tasteTheRainbow(getBeatDivision(32), DIVISOR_64);
-  // clean();
-  // risingSweepRGB(getBeatDivision(32), DIVISOR_64);
-  // clean();
-  // lineMovement(getBeatDivision(32));
+  colorWheelVertical(getBeatDivision(16), DIVISOR_4);
+  clean();
+  folder(getBeatDivision(16), DIVISOR_16);
+  clean();
+  sinewave(getBeatDivision(16), DIVISOR_16);
+  clean();
+  colorWheel(getBeatDivision(16), DIVISOR_4);
+  clean();
+  outline(getBeatDivision(16), DIVISOR_16);
+  clean();
   bouncyBalls(getBeatDivision(16), DIVISOR_16);
+  clean();
+  snake(getBeatDivision(32), DIVISOR_16);
+  clean();
+  upDownArrows(getBeatDivision(32), DIVISOR_64);
+  clean();
+  tasteTheRainbow(getBeatDivision(32), DIVISOR_64);
+  clean();
+  risingSweepRGB(getBeatDivision(32), DIVISOR_64);
+  clean();
+  lineMovement(getBeatDivision(32));
+  clean();
+  cardboardBox(getBeatDivision(32));
+  cardboardBox(getBeatDivision(16), DIVISOR_8);
   clean();
   sphereExplode(getBeatDivision(16), DIVISOR_8);
   clean();
+  // rain(getBeatDivision(32));
   // clean();
   // fireworks(20, 15, 0);
-  // cardboardBox(getBeatDivision(32));
-  // cardboardBox(getBeatDivision(16), DIVISOR_8);
-  rain(getBeatDivision(32));
+  // clean();
 }
