@@ -53,6 +53,8 @@ const float DIVISOR_4 = 0.25;
 const float DIVISOR_8 = 0.125;
 const float DIVISOR_16 = 0.0625;
 const float DIVISOR_32 = 0.03125;
+const float DIVISOR_64 = 0.015625;
+const float DIVISOR_128 = 0.0078125;
 const float THIRD_DIVISOR = 0.333333333;
 const float SIXTH_DIVISOR = 0.166666667;
 
@@ -1441,7 +1443,6 @@ void colorWheel(int duration, float speedMultiplier = 1.0) {
   int ranx, rany, ranz, select, swiper;
 
   start = millis();
-
   while (millis() - start < duration) {
     swiper = random(6);
     select = random(3);
@@ -1740,7 +1741,7 @@ void tasteTheRainbow() {
   }
 }
 
-void bouncyBalls() {
+void bouncyBalls(int duration, float speedMultiplier = 1.0) {
   int greenx  = random(1, 7), greeny  = random(1, 7);
   int bluex   = random(1, 7), bluey   = random(1, 7);
   int redx    = random(1, 7), redy    = random(1, 7);
@@ -1761,179 +1762,181 @@ void bouncyBalls() {
 
   int counter, i, j, k;
 
+  start = millis();
+  while (millis() - start < duration) {
+    color_select = random(0, 3);
+    if (color_select == 0) {
+      c1 = 0;
+      c2 = random(0, 16);
+      c3 = random(0, 16);
+    }
+    if (color_select == 1) {
+      c1 = random(0, 16);
+      c2 = 0;
+      c3 = random(0, 16);
+    }
+    if (color_select == 2) {
+      c1 = random(0, 16);
+      c2 = random(0, 16);
+      c3 = 0;
+    }
 
-  color_select = random(0, 3);
-  if (color_select == 0) {
-    c1 = 0;
-    c2 = random(0, 16);
-    c3 = random(0, 16);
-  }
-  if (color_select == 1) {
-    c1 = random(0, 16);
-    c2 = 0;
-    c3 = random(0, 16);
-  }
-  if (color_select == 2) {
-    c1 = random(0, 16);
-    c2 = random(0, 16);
-    c3 = 0;
-  }
+    color_select2 = random(0, 3);
+    if (color_select2 == 0) {
+      c21 = 0;
+      c22 = random(0, 16);
+      c23 = random(0, 16);
+    }
+    if (color_select2 == 1) {
+      c21 = random(0, 16);
+      c22 = 0;
+      c23 = random(0, 16);
+    }
+    if (color_select2 == 2) {
+      c21 = random(0, 16);
+      c22 = random(0, 16);
+      c23 = 0;
+    }
 
-  color_select2 = random(0, 3);
-  if (color_select2 == 0) {
-    c21 = 0;
-    c22 = random(0, 16);
-    c23 = random(0, 16);
-  }
-  if (color_select2 == 1) {
-    c21 = random(0, 16);
-    c22 = 0;
-    c23 = random(0, 16);
-  }
-  if (color_select2 == 2) {
-    c21 = random(0, 16);
-    c22 = random(0, 16);
-    c23 = 0;
-  }
+    for (counter=0; counter < 200; counter++) {
+      setLED(xo,       yo,       zo,       0,    0,    0);
+      setLED(xo + 1,   yo,       zo,       0,    0,    0);
+      setLED(xo + 2,   yo,       zo,       0,    0,    0);
+      setLED(xo - 1,   yo,       zo,       0,    0,    0);
+      setLED(xo - 2,   yo,       zo,       0,    0,    0);
+      setLED(xo,       yo + 1,   zo,       0,    0,    0);
+      setLED(xo,       yo - 1,   zo,       0,    0,    0);
+      setLED(xo,       yo + 2,   zo,       0,    0,    0);
+      setLED(xo,       yo - 2,   zo,       0,    0,    0);
+      setLED(xo,       yo,       zo - 1,   0,    0,    0);
+      setLED(xo,       yo,       zo + 1,   0,    0,    0);
+      setLED(xo,       yo,       zo - 2,   0,    0,    0);
+      setLED(xo,       yo,       zo + 2,   0,    0,    0);
 
-  for (counter=0; counter < 200; counter++) {
-    setLED(xo,       yo,       zo,       0,    0,    0);
-    setLED(xo + 1,   yo,       zo,       0,    0,    0);
-    setLED(xo + 2,   yo,       zo,       0,    0,    0);
-    setLED(xo - 1,   yo,       zo,       0,    0,    0);
-    setLED(xo - 2,   yo,       zo,       0,    0,    0);
-    setLED(xo,       yo + 1,   zo,       0,    0,    0);
-    setLED(xo,       yo - 1,   zo,       0,    0,    0);
-    setLED(xo,       yo + 2,   zo,       0,    0,    0);
-    setLED(xo,       yo - 2,   zo,       0,    0,    0);
-    setLED(xo,       yo,       zo - 1,   0,    0,    0);
-    setLED(xo,       yo,       zo + 1,   0,    0,    0);
-    setLED(xo,       yo,       zo - 2,   0,    0,    0);
-    setLED(xo,       yo,       zo + 2,   0,    0,    0);
+      setLED(x2o,      y2o,      z2o,      0,    0,    0);
+      setLED(x2o + 1,  y2o,      z2o,      0,    0,    0);
+      setLED(x2o + 2,  y2o,      z2o,      0,    0,    0);
+      setLED(x2o - 1,  y2o,      z2o,      0,    0,    0);
+      setLED(x2o - 2,  y2o,      z2o,      0,    0,    0);
+      setLED(x2o,      y2o + 1,  z2o,      0,    0,    0);
+      setLED(x2o,      y2o - 1,  z2o,      0,    0,    0);
+      setLED(x2o,      y2o + 2,  z2o,      0,    0,    0);
+      setLED(x2o,      y2o - 2,  z2o,      0,    0,    0);
+      setLED(x2o,      y2o,      z2o - 1,  0,    0,    0);
+      setLED(x2o,      y2o,      z2o + 1,  0,    0,    0);
+      setLED(x2o,      y2o,      z2o - 2,  0,    0,    0);
+      setLED(x2o,      y2o,      z2o + 2,  0,    0,    0);
 
-    setLED(x2o,      y2o,      z2o,      0,    0,    0);
-    setLED(x2o + 1,  y2o,      z2o,      0,    0,    0);
-    setLED(x2o + 2,  y2o,      z2o,      0,    0,    0);
-    setLED(x2o - 1,  y2o,      z2o,      0,    0,    0);
-    setLED(x2o - 2,  y2o,      z2o,      0,    0,    0);
-    setLED(x2o,      y2o + 1,  z2o,      0,    0,    0);
-    setLED(x2o,      y2o - 1,  z2o,      0,    0,    0);
-    setLED(x2o,      y2o + 2,  z2o,      0,    0,    0);
-    setLED(x2o,      y2o - 2,  z2o,      0,    0,    0);
-    setLED(x2o,      y2o,      z2o - 1,  0,    0,    0);
-    setLED(x2o,      y2o,      z2o + 1,  0,    0,    0);
-    setLED(x2o,      y2o,      z2o - 2,  0,    0,    0);
-    setLED(x2o,      y2o,      z2o + 2,  0,    0,    0);
+      setLED(xo + 1,   yo + 1,   zo,       0,    0,    0);
+      setLED(xo + 1,   yo - 1,   zo,       0,    0,    0);
+      setLED(xo - 1,   yo + 1,   zo,       0,    0,    0);
+      setLED(xo - 1,   yo - 1,   zo,       0,    0,    0);
+      setLED(xo + 1,   yo + 1,   zo + 1,   0,    0,    0);
+      setLED(xo + 1,   yo - 1,   zo + 1,   0,    0,    0);
+      setLED(xo - 1,   yo + 1,   zo + 1,   0,    0,    0);
+      setLED(xo - 1,   yo - 1,   zo + 1,   0,    0,    0);
+      setLED(xo + 1,   yo + 1,   zo - 1,   0,    0,    0);
+      setLED(xo + 1,   yo - 1,   zo - 1,   0,    0,    0);
+      setLED(xo - 1,   yo + 1,   zo - 1,   0,    0,    0);
+      setLED(xo - 1,   yo - 1,   zo - 1,   0,    0,    0);
 
-    setLED(xo + 1,   yo + 1,   zo,       0,    0,    0);
-    setLED(xo + 1,   yo - 1,   zo,       0,    0,    0);
-    setLED(xo - 1,   yo + 1,   zo,       0,    0,    0);
-    setLED(xo - 1,   yo - 1,   zo,       0,    0,    0);
-    setLED(xo + 1,   yo + 1,   zo + 1,   0,    0,    0);
-    setLED(xo + 1,   yo - 1,   zo + 1,   0,    0,    0);
-    setLED(xo - 1,   yo + 1,   zo + 1,   0,    0,    0);
-    setLED(xo - 1,   yo - 1,   zo + 1,   0,    0,    0);
-    setLED(xo + 1,   yo + 1,   zo - 1,   0,    0,    0);
-    setLED(xo + 1,   yo - 1,   zo - 1,   0,    0,    0);
-    setLED(xo - 1,   yo + 1,   zo - 1,   0,    0,    0);
-    setLED(xo - 1,   yo - 1,   zo - 1,   0,    0,    0);
+      setLED(x2o + 1,  y2o + 1,  z2o,      0,    0,    0);
+      setLED(x2o + 1,  y2o - 1,  z2o,      0,    0,    0);
+      setLED(x2o - 1,  y2o + 1,  z2o,      0,    0,    0);
+      setLED(x2o - 1,  y2o - 1,  z2o,      0,    0,    0);
+      setLED(x2o + 1,  y2o + 1,  z2o + 1,  0,    0,    0);
+      setLED(x2o + 1,  y2o - 1,  z2o + 1,  0,    0,    0);
+      setLED(x2o - 1,  y2o + 1,  z2o + 1,  0,    0,    0);
+      setLED(x2o - 1,  y2o - 1,  z2o + 1,  0,    0,    0);
+      setLED(x2o + 1,  y2o + 1,  z2o - 1,  0,    0,    0);
+      setLED(x2o + 1,  y2o - 1,  z2o - 1,  0,    0,    0);
+      setLED(x2o - 1,  y2o + 1,  z2o - 1,  0,    0,    0);
+      setLED(x2o - 1,  y2o - 1,  z2o - 1,  0,    0,    0);
 
-    setLED(x2o + 1,  y2o + 1,  z2o,      0,    0,    0);
-    setLED(x2o + 1,  y2o - 1,  z2o,      0,    0,    0);
-    setLED(x2o - 1,  y2o + 1,  z2o,      0,    0,    0);
-    setLED(x2o - 1,  y2o - 1,  z2o,      0,    0,    0);
-    setLED(x2o + 1,  y2o + 1,  z2o + 1,  0,    0,    0);
-    setLED(x2o + 1,  y2o - 1,  z2o + 1,  0,    0,    0);
-    setLED(x2o - 1,  y2o + 1,  z2o + 1,  0,    0,    0);
-    setLED(x2o - 1,  y2o - 1,  z2o + 1,  0,    0,    0);
-    setLED(x2o + 1,  y2o + 1,  z2o - 1,  0,    0,    0);
-    setLED(x2o + 1,  y2o - 1,  z2o - 1,  0,    0,    0);
-    setLED(x2o - 1,  y2o + 1,  z2o - 1,  0,    0,    0);
-    setLED(x2o - 1,  y2o - 1,  z2o - 1,  0,    0,    0);
+      setLED(x,        y,        z,        c1,   c2,   c3);
+      setLED(x,        y,        z - 1,    c1,   c2,   c3);
+      setLED(x,        y,        z + 1,    c1,   c2,   c3);
+      setLED(x,        y,        z - 2,    c1,   c2,   c3);
+      setLED(x,        y,        z + 2,    c1,   c2,   c3);
+      setLED(x + 1,    y,        z,        c1,   c2,   c3);
+      setLED(x - 1,    y,        z,        c1,   c2,   c3);
+      setLED(x,        y + 1,    z,        c1,   c2,   c3);
+      setLED(x,        y - 1,    z,        c1,   c2,   c3);
+      setLED(x + 2,    y,        z,        c1,   c2,   c3);
+      setLED(x - 2,    y,        z,        c1,   c2,   c3);
+      setLED(x,        y + 2,    z,        c1,   c2,   c3);
+      setLED(x,        y - 2,    z,        c1,   c2,   c3);
+      setLED(x + 1,    y + 1,    z,        c1,   c2,   c3);
+      setLED(x + 1,    y - 1,    z,        c1,   c2,   c3);
+      setLED(x - 1,    y + 1,    z,        c1,   c2,   c3);
+      setLED(x - 1,    y - 1,    z,        c1,   c2,   c3);
+      setLED(x + 1,    y + 1,    z + 1,    c1,   c2,   c3);
+      setLED(x + 1,    y - 1,    z + 1,    c1,   c2,   c3);
+      setLED(x - 1,    y + 1,    z + 1,    c1,   c2,   c3);
+      setLED(x - 1,    y - 1,    z + 1,    c1,   c2,   c3);
+      setLED(x + 1,    y + 1,    z - 1,    c1,   c2,   c3);
+      setLED(x + 1,    y - 1,    z - 1,    c1,   c2,   c3);
+      setLED(x - 1,    y + 1,    z - 1,    c1,   c2,   c3);
+      setLED(x - 1,    y - 1,    z - 1,    c1,   c2,   c3);
 
-    setLED(x,        y,        z,        c1,   c2,   c3);
-    setLED(x,        y,        z - 1,    c1,   c2,   c3);
-    setLED(x,        y,        z + 1,    c1,   c2,   c3);
-    setLED(x,        y,        z - 2,    c1,   c2,   c3);
-    setLED(x,        y,        z + 2,    c1,   c2,   c3);
-    setLED(x + 1,    y,        z,        c1,   c2,   c3);
-    setLED(x - 1,    y,        z,        c1,   c2,   c3);
-    setLED(x,        y + 1,    z,        c1,   c2,   c3);
-    setLED(x,        y - 1,    z,        c1,   c2,   c3);
-    setLED(x + 2,    y,        z,        c1,   c2,   c3);
-    setLED(x - 2,    y,        z,        c1,   c2,   c3);
-    setLED(x,        y + 2,    z,        c1,   c2,   c3);
-    setLED(x,        y - 2,    z,        c1,   c2,   c3);
-    setLED(x + 1,    y + 1,    z,        c1,   c2,   c3);
-    setLED(x + 1,    y - 1,    z,        c1,   c2,   c3);
-    setLED(x - 1,    y + 1,    z,        c1,   c2,   c3);
-    setLED(x - 1,    y - 1,    z,        c1,   c2,   c3);
-    setLED(x + 1,    y + 1,    z + 1,    c1,   c2,   c3);
-    setLED(x + 1,    y - 1,    z + 1,    c1,   c2,   c3);
-    setLED(x - 1,    y + 1,    z + 1,    c1,   c2,   c3);
-    setLED(x - 1,    y - 1,    z + 1,    c1,   c2,   c3);
-    setLED(x + 1,    y + 1,    z - 1,    c1,   c2,   c3);
-    setLED(x + 1,    y - 1,    z - 1,    c1,   c2,   c3);
-    setLED(x - 1,    y + 1,    z - 1,    c1,   c2,   c3);
-    setLED(x - 1,    y - 1,    z - 1,    c1,   c2,   c3);
+      setLED(x2,       y2,       z2,       c21,  c22,  c23);
+      setLED(x2,       y2,       z2 - 1,   c21,  c22,  c23);
+      setLED(x2,       y2,       z2 + 1,   c21,  c22,  c23);
+      setLED(x2,       y2,       z2 - 2,   c21,  c22,  c23);
+      setLED(x2,       y2,       z2 + 2,   c21,  c22,  c23);
+      setLED(x2 + 1,   y2,       z2,       c21,  c22,  c23);
+      setLED(x2 - 1,   y2,       z2,       c21,  c22,  c23);
+      setLED(x2,       y2 + 1,   z2,       c21,  c22,  c23);
+      setLED(x2,       y2 - 1,   z2,       c21,  c22,  c23);
+      setLED(x2 + 2,   y2,       z2,       c21,  c22,  c23);
+      setLED(x2 - 2,   y2,       z2,       c21,  c22,  c23);
+      setLED(x2,       y2 + 2,   z2,       c21,  c22,  c23);
+      setLED(x2,       y2 - 2,   z2,       c21,  c22,  c23);
+      setLED(x2 + 1,   y2 + 1,   z2,       c21,  c22,  c23);
+      setLED(x2 + 1,   y2 - 1,   z2,       c21,  c22,  c23);
+      setLED(x2 - 1,   y2 + 1,   z2,       c21,  c22,  c23);
+      setLED(x2 - 1,   y2 - 1,   z2,       c21,  c22,  c23);
+      setLED(x2 + 1,   y2 + 1,   z2 + 1,   c21,  c22,  c23);
+      setLED(x2 + 1,   y2 - 1,   z2 + 1,   c21,  c22,  c23);
+      setLED(x2 - 1,   y2 + 1,   z2 + 1,   c21,  c22,  c23);
+      setLED(x2 - 1,   y2 - 1,   z2 + 1,   c21,  c22,  c23);
+      setLED(x2 + 1,   y2 + 1,   z2 - 1,   c21,  c22,  c23);
+      setLED(x2 + 1,   y2 - 1,   z2 - 1,   c21,  c22,  c23);
+      setLED(x2 - 1,   y2 + 1,   z2 - 1,   c21,  c22,  c23);
+      setLED(x2 - 1,   y2 - 1,   z2 - 1,   c21,  c22,  c23);
 
-    setLED(x2,       y2,       z2,       c21,  c22,  c23);
-    setLED(x2,       y2,       z2 - 1,   c21,  c22,  c23);
-    setLED(x2,       y2,       z2 + 1,   c21,  c22,  c23);
-    setLED(x2,       y2,       z2 - 2,   c21,  c22,  c23);
-    setLED(x2,       y2,       z2 + 2,   c21,  c22,  c23);
-    setLED(x2 + 1,   y2,       z2,       c21,  c22,  c23);
-    setLED(x2 - 1,   y2,       z2,       c21,  c22,  c23);
-    setLED(x2,       y2 + 1,   z2,       c21,  c22,  c23);
-    setLED(x2,       y2 - 1,   z2,       c21,  c22,  c23);
-    setLED(x2 + 2,   y2,       z2,       c21,  c22,  c23);
-    setLED(x2 - 2,   y2,       z2,       c21,  c22,  c23);
-    setLED(x2,       y2 + 2,   z2,       c21,  c22,  c23);
-    setLED(x2,       y2 - 2,   z2,       c21,  c22,  c23);
-    setLED(x2 + 1,   y2 + 1,   z2,       c21,  c22,  c23);
-    setLED(x2 + 1,   y2 - 1,   z2,       c21,  c22,  c23);
-    setLED(x2 - 1,   y2 + 1,   z2,       c21,  c22,  c23);
-    setLED(x2 - 1,   y2 - 1,   z2,       c21,  c22,  c23);
-    setLED(x2 + 1,   y2 + 1,   z2 + 1,   c21,  c22,  c23);
-    setLED(x2 + 1,   y2 - 1,   z2 + 1,   c21,  c22,  c23);
-    setLED(x2 - 1,   y2 + 1,   z2 + 1,   c21,  c22,  c23);
-    setLED(x2 - 1,   y2 - 1,   z2 + 1,   c21,  c22,  c23);
-    setLED(x2 + 1,   y2 + 1,   z2 - 1,   c21,  c22,  c23);
-    setLED(x2 + 1,   y2 - 1,   z2 - 1,   c21,  c22,  c23);
-    setLED(x2 - 1,   y2 + 1,   z2 - 1,   c21,  c22,  c23);
-    setLED(x2 - 1,   y2 - 1,   z2 - 1,   c21,  c22,  c23);
+      x2o = x2;
+      y2o = y2;
+      z2o = z2;
 
-    x2o = x2;
-    y2o = y2;
-    z2o = z2;
+      xo = x;
+      yo = y;
+      zo = z;
 
-    xo = x;
-    yo = y;
-    zo = z;
+      delay(getBeatDivision(speedMultiplier));
 
-    delay(45);
+      x = x + xmult;
+      y = y + ymult;
+      z = z + zmult;
 
-    x = x + xmult;
-    y = y + ymult;
-    z = z + zmult;
+      x2 = x2 + x2mult;
+      y2 = y2 + y2mult;
+      z2 = z2 + z2mult;
 
-    x2 = x2 + x2mult;
-    y2 = y2 + y2mult;
-    z2 = z2 + z2mult;
+      if (x >= 7)   xmult = random(-1, 1);
+      if (y >= 7)   ymult = random(-1, 1);
+      if (z >= 7)   zmult = random(-1, 1);
+      if (x <= 0)   xmult = random(0, 2);
+      if (y <= 0)   ymult = random(0, 2);
+      if (z <= 0)   zmult = random(0, 2);
 
-    if (x >= 7)   xmult = random(-1, 1);
-    if (y >= 7)   ymult = random(-1, 1);
-    if (z >= 7)   zmult = random(-1, 1);
-    if (x <= 0)   xmult = random(0, 2);
-    if (y <= 0)   ymult = random(0, 2);
-    if (z <= 0)   zmult = random(0, 2);
-
-    if (x2 >= 7)  x2mult = random(-1, 1);
-    if (y2 >= 7)  y2mult = random(-1, 1);
-    if (z2 >= 7)  z2mult = random(-1, 1);
-    if (x2 <= 0)  x2mult = random(0, 2);
-    if (y2 <= 0)  y2mult = random(0, 2);
-    if (z <= 0)   z2mult = random(0, 2);
+      if (x2 >= 7)  x2mult = random(-1, 1);
+      if (y2 >= 7)  y2mult = random(-1, 1);
+      if (z2 >= 7)  z2mult = random(-1, 1);
+      if (x2 <= 0)  x2mult = random(0, 2);
+      if (y2 <= 0)  y2mult = random(0, 2);
+      if (z <= 0)   z2mult = random(0, 2);
+    }
   }
 }
 
@@ -2219,9 +2222,8 @@ void loop() {
   // clean();
   // outline(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // bouncyBalls();
+  // bouncyBalls(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // wipeOut();
   // snake();
   // clean();
   // fireworks(20, 15, 0);
