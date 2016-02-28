@@ -49,9 +49,10 @@ unsigned long start; // Millisecond timer to cycle through the animations
 const int CUBE_SIZE = 8;
 const int TEMPO = 126; // bpm
 
-const float FOURTH_DIVISOR = 0.25;
-const float EIGHTH_DIVISOR = 0.125;
-const float SIXTEENTH_DIVISOR = 0.0625;
+const float DIVISOR_4 = 0.25;
+const float DIVISOR_8 = 0.125;
+const float DIVISOR_16 = 0.0625;
+const float DIVISOR_32 = 0.03125;
 const float THIRD_DIVISOR = 0.333333333;
 const float SIXTH_DIVISOR = 0.166666667;
 
@@ -665,9 +666,9 @@ void rainVersionTwo() {
   }
 }
 
-void folder() {
+void folder(int duration, float speedMultiplier = 1.0) {
   int xx, yy, zz;
-  int pullback[16], state=0, backorfront=7; // backorfront 7 for back 0 for front
+  int pullback[16], state = 0, backorfront = 7; // backorfront 7 for back 0 for front
 
   int folderaddr[16], LED_Old[16], oldpullback[16];
   int ranx = random(16), rany = random(16), ranz = random(16),
@@ -690,7 +691,7 @@ void folder() {
   }
 
   start = millis();
-  while (millis() - start < 10000) {
+  while (millis() - start < duration) {
     if (top == 1) {
       if (side == 0) {
         //top to left-side
@@ -700,6 +701,7 @@ void folder() {
             setLED(7 - folderaddr[yy], yy - pullback[yy],    xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 2) {
         //top to back-side
@@ -709,6 +711,7 @@ void folder() {
             setLED(7 - folderaddr[yy], xx, yy - pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 3) {
         //top-side to front-side
@@ -718,6 +721,7 @@ void folder() {
             setLED(7 - folderaddr[7-yy], xx, yy + pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 1) {
         //top-side to right
@@ -727,6 +731,7 @@ void folder() {
             setLED(7 - folderaddr[7-yy], yy + pullback[yy],    xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (right == 1) {
@@ -738,6 +743,7 @@ void folder() {
             setLED(yy + pullback[7-yy],    7 - folderaddr[7-yy], xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 3) {
         //right-side to front-side
@@ -747,6 +753,7 @@ void folder() {
             setLED(xx, 7 - folderaddr[7-yy], yy + pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 2) {
         //right-side to back-side
@@ -756,6 +763,7 @@ void folder() {
             setLED(xx, 7 - folderaddr[yy], yy - pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 5) {
         //right-side to bottom
@@ -765,6 +773,7 @@ void folder() {
             setLED(yy - pullback[yy],    7 - folderaddr[yy], xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (left == 1) {
@@ -776,6 +785,7 @@ void folder() {
             setLED(yy + pullback[yy],    folderaddr[7-yy], xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 3) {
         //left-side to front-side
@@ -785,6 +795,7 @@ void folder() {
             setLED(xx, folderaddr[7-yy], yy + pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 2) {
         //left-side to back-side
@@ -794,6 +805,7 @@ void folder() {
             setLED(xx, folderaddr[yy], yy - pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 5) {
         //left-side to bottom
@@ -803,6 +815,7 @@ void folder() {
             setLED(yy - pullback[yy],    folderaddr[yy], xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (back == 1) {
@@ -814,6 +827,7 @@ void folder() {
             setLED(xx, yy + pullback[yy],    folderaddr[7-yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 4) {
         // back-side to top-side
@@ -823,6 +837,7 @@ void folder() {
             setLED(yy + pullback[yy],    xx, folderaddr[7-yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 5) {
         // back-side to bottom
@@ -832,7 +847,8 @@ void folder() {
             setLED(yy - pullback[yy],    xx, folderaddr[yy], ranx, rany, ranz);
           }
         }
-      }//state1
+        delay(getBeatDivisionPerLayer(speedMultiplier));
+      }
       if (side == 0) {
         //back-side to left-side
         for (yy=0; yy < 8; yy++) {
@@ -841,6 +857,7 @@ void folder() {
             setLED(xx, yy - pullback[yy],    folderaddr[yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (bot == 1) {
@@ -852,6 +869,7 @@ void folder() {
             setLED(folderaddr[7-yy], yy + pullback[yy],    xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 3) {
         //bottom to front-side
@@ -861,6 +879,7 @@ void folder() {
             setLED(folderaddr[7-yy], xx, yy + pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 2) {
         //bottom to back-side
@@ -870,6 +889,7 @@ void folder() {
             setLED(folderaddr[yy], xx, yy - pullback[yy],    ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 0) {
         //bottom to left-side
@@ -879,6 +899,7 @@ void folder() {
             setLED(folderaddr[yy], yy - pullback[yy],    xx, ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (front == 1) {
@@ -890,6 +911,7 @@ void folder() {
             setLED(xx, yy - pullback[yy],    7 - folderaddr[yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 5) {
         // front-side to bottom
@@ -899,6 +921,7 @@ void folder() {
             setLED(yy - pullback[yy],    xx, 7 - folderaddr[yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 4) {
         // front-side to top-side
@@ -908,6 +931,7 @@ void folder() {
             setLED(yy + pullback[yy],    xx, 7 - folderaddr[7-yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
       if (side == 1) {
         //front-side to right-side
@@ -917,10 +941,10 @@ void folder() {
             setLED(xx, yy + pullback[yy],    7 - folderaddr[7-yy], ranx, rany, ranz);
           }
         }
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
 
-    delay(5);
 
     for (xx=0; xx < 8; xx++) {
       LED_Old[xx] = folderaddr[xx];
@@ -928,13 +952,12 @@ void folder() {
     }
 
     if (folderaddr[7] == 7) {
-      // pullback=8;
       for (zz=0; zz < 8; zz++) {
         pullback[zz] = pullback[zz]+1;
       }
 
-      if (pullback[7] == 8) {//finished with fold
-        delay(10);
+      if (pullback[7] == 8) {
+        // delay(getBeatDivisionPerLayer(speedMultiplier) * 30);
 
         ranselect = random(3);
         if (ranselect == 0) {
@@ -1067,7 +1090,7 @@ void folder() {
             if (side_select == 1) side = 5;
             if (side_select == 2) side = 4;
           }
-        } else if (front==1) {  // FRONT
+        } else if (front == 1) {  // FRONT
           front = 0;
 
           if (side == 4) {        // front to top
@@ -1125,10 +1148,6 @@ void folder() {
           }
         }
 
-
-        // for (yy=0; yy<8; yy++)
-        // for (xx=0; xx<8; xx++)
-        // setLED(LED_Old[yy], xx, yy-oldpullback[yy], 0, 0, 0);
         for (xx=0; xx < 8; xx++) {
           oldpullback[xx] = 0;
           pullback[xx] = 0;
@@ -1153,7 +1172,6 @@ void folder() {
     }
   }
 }
-
 void snake() {
   int wipex, wipey, wipez, ranr, rang, ranb, select;
   int oldx[50], oldy[50], oldz[50];
@@ -1258,7 +1276,7 @@ void snake() {
   }
 }
 
-void sinwaveTwo() {
+void sinwave(int duration, float speedMultiplier = 1.0) {
   int addr, addrt, colselect, select;
   int sinewavearray[8], sinewavearrayOLD[8], sinemult[8];
   int rr = 0, gg = 0, bb = 15;
@@ -1284,7 +1302,7 @@ void sinwaveTwo() {
 
   start = millis();
 
-  while(millis() - start < 15000) {
+  while(millis() - start < duration) {
     for (addr=0; addr < 8; addr++) {
       if (sinewavearray[addr] == 7) sinemult[addr] = -1;
       if (sinewavearray[addr] == 0) sinemult[addr] = 1;
@@ -1355,7 +1373,7 @@ void sinwaveTwo() {
     }
 
     for (addr=0; addr < 8; addr++) sinewavearrayOLD[addr] = sinewavearray[addr];
-    delay(30);
+    delay(getBeatDivision(speedMultiplier));
   }
 }
 
@@ -2190,11 +2208,13 @@ void clean() {
 }
 
 void loop() {
-  // colorWheelVertical(getBeatDivision(16), FOURTH_DIVISION);
+  // colorWheelVertical(getBeatDivision(16), DIVISOR_4);
   // clean();
-  // folder();
+  folder(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // colorWheel(getBeatDivision(16), FOURTH_DIVISION);
+  // sinewave(getBeatDivision(16), DIVISOR_4);
+  // clean();
+  // colorWheel(getBeatDivision(16), DIVISOR_4);
   // clean();
   // bouncyBalls();
   // clean();
@@ -2203,5 +2223,5 @@ void loop() {
   // clean();
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
-  // cardboardBox(getBeatDivision(16), EIGHTH_DIVISOR);
+  // cardboardBox(getBeatDivision(16), DIVISOR_8);
 }
