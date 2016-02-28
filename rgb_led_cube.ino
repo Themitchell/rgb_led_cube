@@ -2321,43 +2321,44 @@ void outline(int duration, float speedMultiplier = 1.0) {
 void cardboardBox(int duration, float speedMultiplier = 1.0) {
   start = millis();
   while (millis() - start < duration) {
-    generateOutline(0, 8, 0, 0, 15);
+    generateOutline(8, 0, 0, 15, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 8, 0, 0, 0);
-    generateOutline(0, 6, 0, 3, 11);
+    generateOutline(8, 0, 0, 0, 0);
+    generateOutline(6, 0, 3, 11, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 6, 0, 0, 0);
-    generateOutline(0, 4, 0, 7, 7);
+    generateOutline(6, 0, 0, 0, 0);
+    generateOutline(4, 0, 7, 7, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 4, 0, 0, 0);
-    generateOutline(0, 2, 0, 11, 3);
+    generateOutline(4, 0, 0, 0, 0);
+    generateOutline(2, 0, 11, 3, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 2, 0, 0, 0);
-    generateOutline(0, 4, 0, 15, 0);
+    generateOutline(2, 0, 0, 0, 0);
+    generateOutline(4, 0, 15, 0, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 4, 0, 0, 0);
-    generateOutline(0, 6, 3, 11, 0);
+    generateOutline(4, 0, 0, 0, 0);
+    generateOutline(6, 3, 11, 0, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 6, 0, 0, 0);
-    generateOutline(0, 8, 7, 7, 0);
+    generateOutline(6, 0, 0, 0, 0);
+    generateOutline(8, 7, 7, 0, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 8, 0, 0, 0);
-    generateOutline(0, 6, 11, 3, 0);
+    generateOutline(8, 0, 0, 0, 0);
+    generateOutline(6, 11, 3, 0, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 6, 0, 0, 0);
-    generateOutline(0, 4, 15, 0, 0);
+    generateOutline(6, 0, 0, 0, 0);
+    generateOutline(4, 15, 0, 0, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 4, 0, 0, 0);
-    generateOutline(0, 2, 11, 0, 3);
+    generateOutline(4, 0, 0, 0, 0);
+    generateOutline(2, 11, 0, 3, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 2, 0, 0, 0);
-    generateOutline(0, 4, 7, 0, 7);
+    generateOutline(2, 0, 0, 0, 0);
+    generateOutline(4, 7, 0, 7, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 4, 0, 0, 0);
-    generateOutline(0, 6, 3, 0, 11);
+    generateOutline(4, 0, 0, 0, 0);
+    generateOutline(6, 3, 0, 11, 0);
     delay(getBeatDivision(speedMultiplier));
-    generateOutline(0, 6, 0, 0, 0);
+    generateOutline(6, 0, 0, 0, 0);
   }
+}
 
   clean();
 }
@@ -2384,8 +2385,6 @@ void loop() {
   // clean();
   // outline(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // bouncyBalls(getBeatDivision(16), DIVISOR_16);
-  // clean();
   // snake(getBeatDivision(32), DIVISOR_16);
   // clean();
   // upDownArrows(getBeatDivision(32), DIVISOR_64);
@@ -2395,6 +2394,8 @@ void loop() {
   // risingSweepRGB(getBeatDivision(32), DIVISOR_64);
   // clean();
   // lineMovement(getBeatDivision(32));
+  bouncyBalls(getBeatDivision(16), DIVISOR_16);
+  clean();
   // clean();
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
