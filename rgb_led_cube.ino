@@ -1174,7 +1174,8 @@ void folder(int duration, float speedMultiplier = 1.0) {
     }
   }
 }
-void snake() {
+
+void snake(int duration, float speedMultiplier = 1.0) {
   int wipex, wipey, wipez, ranr, rang, ranb, select;
   int oldx[50], oldy[50], oldz[50];
   int x[50], y[50], z[50];
@@ -1199,7 +1200,7 @@ void snake() {
 
   start = millis();
 
-  while(millis() - start < 15000) {
+  while(millis() - start < duration) {
     direct = random(3);
 
     for (addr=1; addr < ledcount + 1; addr++) {
@@ -1213,7 +1214,7 @@ void snake() {
       oldz[addr]=z[addr];
     }
 
-    delay(20);
+    delay(getBeatDivision(speedMultiplier));
 
     if (direct == 0) x[0] = x[0] + xbit;
     if (direct == 1) y[0] = y[0] + ybit;
@@ -2224,7 +2225,7 @@ void loop() {
   // clean();
   // bouncyBalls(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // snake();
+  // snake(getBeatDivision(32), DIVISOR_16);
   // clean();
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
