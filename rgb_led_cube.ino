@@ -98,16 +98,18 @@ void setup() {
 }
 
 void loop() {
-  fireworks(20, 15, 0);
-  rainVersionTwo();
-  folder();
-  sinwaveTwo();
-  //wipe_out();
-  clean();
-  bouncyvTwo();
-  //color_wheelTWO();
-  clean();
-  harlem_shake();
+  colorWheelVertical();
+  // clean();
+  // folder();
+  // clean();
+  // colorWheel();
+  // clean();
+  // bouncyBalls();
+  // clean();
+  // wipeOut();
+  // snake();
+  // clean();
+  // fireworks(20, 15, 0);
 }
 
 void setLED(int level, int row, int column, byte red, byte green, byte blue) {
@@ -409,7 +411,7 @@ void fireworks (int iterations, int n, int delayx) {
   }
 }
 
-void wipe_out() {
+void wipeOut() {
   int xxx = 0;
   int yyy = 0;
   int zzz = 0;
@@ -1140,7 +1142,7 @@ void folder() {
   }
 }
 
-void bouncyvTwo() {
+void snake() {
   int wipex, wipey, wipez, ranr, rang, ranb, select;
   int oldx[50], oldy[50], oldz[50];
   int x[50], y[50], z[50];
@@ -1345,14 +1347,17 @@ void sinwaveTwo() {
   }
 }
 
-void color_wheel() {
+void colorWheelVertical() {
   int xx, yy, zz, ww;
   int rr = 1, gg = 1, bb = 1;
   int ranx, rany, swiper;
 
+  int duration = 10000;
+  int pause = 30;
+
   start = millis();
 
-  while (millis() - start < 100000) {
+  while (millis() - start < duration) {
     swiper  = random(3);
     ranx    = random(16);
     rany    = random(16);
@@ -1363,7 +1368,7 @@ void color_wheel() {
           setLED(xx, yy, zz,  ranx, 0, rany);
         }
       }
-      delay(50);
+      delay(pause);
     }
 
     ranx = random(16);
@@ -1375,7 +1380,7 @@ void color_wheel() {
           setLED(xx,yy, zz, ranx, rany, 0);
         }
       }
-      delay(50);
+      delay(pause);
     }
 
     ranx = random(16);
@@ -1386,7 +1391,7 @@ void color_wheel() {
           setLED(xx,yy, zz, 0, ranx, rany);
         }
       }
-      delay(50);
+      delay(pause);
     }
 
     ranx = random(16);
@@ -1398,19 +1403,22 @@ void color_wheel() {
           setLED(xx,yy, zz, rany, ranx, 0);
         }
       }
-      delay(50);
+      delay(pause);
     }
   }
 }
 
-void color_wheelTWO() {
+void colorWheel() {
   int xx, yy, zz, ww;
-  int rr=1, gg=1, bb=1;
-  int ranx, rany ,ranz, select, swiper;
+  int rr = 1, gg = 1, bb = 1;
+  int ranx, rany, ranz, select, swiper;
+
+  int duration = 10000;
+  int pause = 10;
 
   start = millis();
 
-  while (millis() - start < 10000) {
+  while (millis() - start < duration) {
     swiper = random(6);
     select = random(3);
 
@@ -1419,7 +1427,7 @@ void color_wheelTWO() {
       rany = random(16);
       ranz = random(16);
     }
-    if (select==1) {
+    if (select == 1) {
       ranx = random(16);
       rany = 0;
       ranz = random(16);
@@ -1437,7 +1445,7 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
     if (swiper==1) {//bot to top
@@ -1447,7 +1455,7 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
     if (swiper==2) {//back to front
@@ -1457,7 +1465,7 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
     if (swiper==3) {
@@ -1467,7 +1475,7 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
     if (swiper==4) {//top to bot
@@ -1477,7 +1485,7 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
     if (swiper==5) {//front to back
@@ -1487,13 +1495,13 @@ void color_wheelTWO() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(30);
+        delay(pause);
       }
     }
   }
 }
 
-void harlem_shake() {
+void lineMovement() {
   int greenx  = random(1, 7), greeny  = random(1, 7);
   int bluex   = random(1, 7), bluey   = random(1, 7);
   int redx    = random(1, 7), redy    = random(1, 7);
@@ -1630,13 +1638,17 @@ void harlem_shake() {
     redy = redy + redmulty;
     redx = redx + redmult;
   }
+}
+
+void risingSweepWhite() {
+  int counter, i, j, k;
 
   for (counter=0; counter < 3; counter++) { // counter was 3
     for (i=0; i < 8; i++) {
       for (j=0; j < 8; j++) {
         for (k=0; k < 8; k++) {
           setLED(i, j, k, 8, 15, 15);// red too intense to make white at 15. Reduced to 8 - makes nice white level.
-          delay(50);
+          delay(1);
         }
       }
     }
@@ -1644,13 +1656,17 @@ void harlem_shake() {
       for (j=0; j < 8; j++) {
         for (k=0; k < 8; k++) {
           setLED(i, j, k, 0, 0, 0);
-          delay(50);
+          delay(1);
         }
       }
     }
   }
+}
 
-  for (m=0; m < 1; m++) {
+void risingSweepRGB() {
+  int counter, i, j, k;
+
+  for (counter=0; counter < 1; counter++) {
     for (i=0; i < 8; i++) {
       for (j=0; j < 8; j++) {
         for (k=0; k < 8; k++) {
@@ -1683,12 +1699,12 @@ void harlem_shake() {
       }
     }
   }
+}
 
-  clean();
+void tasteTheRainbow() {
+  int counter, i, j, k;
 
-  // this is the random changing led colour full cube
-
-  for (m=0; m < 20; m++) {
+  for (counter=0; counter < 20; counter++) {
     for (k=0; k < 200; k++) {
       setLED(random(8), random(8), random(8), random(16), random(16), 0);
       setLED(random(8), random(8), random(8), random(16), 0,          random(16));
@@ -1698,8 +1714,29 @@ void harlem_shake() {
       setLED(random(8),random(8),random(8),0,0,0);
     }
   }
+}
 
-  clean();
+void bouncyBalls() {
+  int greenx  = random(1, 7), greeny  = random(1, 7);
+  int bluex   = random(1, 7), bluey   = random(1, 7);
+  int redx    = random(1, 7), redy    = random(1, 7);
+  int greenmult   = 1, bluemult   = 1, redmult  = 1;
+  int greenmulty  = 1, bluemulty  = 1, redmulty = 1;
+  int oredx, oredy, obluex, obluey, ogreenx, ogreeny;
+  int cb1 = 15, cb2 = 0, cr1 = 15 , cr2 = 0, cg1 = 15, cg2 = 0;
+  int time_counter = 10, timemult = 2;
+  int m;
+  int c1 = 1, c2 = 1, c3 = 1;
+  int xmult = 1, ymult = 1, zmult = 1;
+  int x = 4, y = 4, z = 4;
+  int color_select, xo, yo, zo;
+  int c21 = 1, c22 = 1, c23 = 1;
+  int x2mult = 1, y2mult = 1, z2mult = 1;
+  int x2 = 2, y2 = 2, z2 = 2;
+  int color_select2, x2o, y2o, z2o;
+
+  int counter, i, j, k;
+
 
   color_select = random(0, 3);
   if (color_select == 0) {
@@ -1874,6 +1911,28 @@ void harlem_shake() {
     if (y2 <= 0)  y2mult = random(0, 2);
     if (z <= 0)   z2mult = random(0, 2);
   }
+}
+
+void upDownArrows() {
+  int greenx  = random(1, 7), greeny  = random(1, 7);
+  int bluex   = random(1, 7), bluey   = random(1, 7);
+  int redx    = random(1, 7), redy    = random(1, 7);
+  int greenmult   = 1, bluemult   = 1, redmult  = 1;
+  int greenmulty  = 1, bluemulty  = 1, redmulty = 1;
+  int oredx, oredy, obluex, obluey, ogreenx, ogreeny;
+  int cb1 = 15, cb2 = 0, cr1 = 15 , cr2 = 0, cg1 = 15, cg2 = 0;
+  int time_counter = 10, timemult = 2;
+  int m;
+  int c1 = 1, c2 = 1, c3 = 1;
+  int xmult = 1, ymult = 1, zmult = 1;
+  int x = 4, y = 4, z = 4;
+  int color_select, xo, yo, zo;
+  int c21 = 1, c22 = 1, c23 = 1;
+  int x2mult = 1, y2mult = 1, z2mult = 1;
+  int x2 = 2, y2 = 2, z2 = 2;
+  int color_select2, x2o, y2o, z2o;
+
+  int counter, i, j, k;
 
   for (counter=0; counter < 15; counter++) {
     color_select = random(0, 3);
