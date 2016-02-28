@@ -2374,6 +2374,242 @@ void setFullColor(byte red, byte green, byte blue) {
 void clean() {
   setFullColor(0, 0, 0);
 }
+
+void xLargeSphere(byte red, byte green, byte blue) {
+  setLED(0, 3, 3, red, green, blue);
+  setLED(0, 3, 4, red, green, blue);
+  setLED(0, 4, 3, red, green, blue);
+  setLED(0, 4, 4, red, green, blue);
+
+  setLED(1, 1, 3, red, green, blue);
+  setLED(1, 1, 4, red, green, blue);
+  setLED(1, 2, 2, red, green, blue);
+  setLED(1, 2, 5, red, green, blue);
+  setLED(1, 3, 1, red, green, blue);
+  setLED(1, 3, 6, red, green, blue);
+  setLED(1, 4, 1, red, green, blue);
+  setLED(1, 4, 6, red, green, blue);
+  setLED(1, 5, 2, red, green, blue);
+  setLED(1, 5, 5, red, green, blue);
+  setLED(1, 6, 3, red, green, blue);
+  setLED(1, 6, 4, red, green, blue);
+
+  setLED(2, 1, 2, red, green, blue);
+  setLED(2, 1, 5, red, green, blue);
+  setLED(2, 2, 1, red, green, blue);
+  setLED(2, 2, 6, red, green, blue);
+  setLED(2, 5, 1, red, green, blue);
+  setLED(2, 5, 6, red, green, blue);
+  setLED(2, 6, 2, red, green, blue);
+  setLED(2, 6, 3, red, green, blue);
+  setLED(2, 6, 4, red, green, blue);
+  setLED(2, 6, 5, red, green, blue);
+
+  setLED(3, 0, 3, red, green, blue);
+  setLED(3, 0, 4, red, green, blue);
+  setLED(3, 1, 1, red, green, blue);
+  setLED(3, 1, 6, red, green, blue);
+  setLED(3, 3, 0, red, green, blue);
+  setLED(3, 3, 7, red, green, blue);
+  setLED(3, 4, 0, red, green, blue);
+  setLED(3, 4, 7, red, green, blue);
+  setLED(3, 6, 1, red, green, blue);
+  setLED(3, 6, 6, red, green, blue);
+  setLED(3, 7, 3, red, green, blue);
+  setLED(3, 7, 4, red, green, blue);
+
+  setLED(4, 0, 3, red, green, blue);
+  setLED(4, 0, 4, red, green, blue);
+  setLED(4, 1, 1, red, green, blue);
+  setLED(4, 1, 6, red, green, blue);
+  setLED(4, 3, 0, red, green, blue);
+  setLED(4, 3, 7, red, green, blue);
+  setLED(4, 4, 0, red, green, blue);
+  setLED(4, 4, 7, red, green, blue);
+  setLED(4, 6, 1, red, green, blue);
+  setLED(4, 6, 6, red, green, blue);
+  setLED(4, 7, 3, red, green, blue);
+  setLED(4, 7, 4, red, green, blue);
+
+  setLED(5, 1, 2, red, green, blue);
+  setLED(5, 1, 5, red, green, blue);
+  setLED(5, 2, 1, red, green, blue);
+  setLED(5, 2, 6, red, green, blue);
+  setLED(5, 5, 1, red, green, blue);
+  setLED(5, 5, 6, red, green, blue);
+  setLED(5, 6, 2, red, green, blue);
+  setLED(5, 6, 3, red, green, blue);
+  setLED(5, 6, 4, red, green, blue);
+  setLED(5, 6, 5, red, green, blue);
+
+  setLED(6, 1, 3, red, green, blue);
+  setLED(6, 1, 4, red, green, blue);
+  setLED(6, 2, 2, red, green, blue);
+  setLED(6, 2, 5, red, green, blue);
+  setLED(6, 3, 1, red, green, blue);
+  setLED(6, 3, 6, red, green, blue);
+  setLED(6, 4, 1, red, green, blue);
+  setLED(6, 4, 6, red, green, blue);
+  setLED(6, 5, 2, red, green, blue);
+  setLED(6, 5, 5, red, green, blue);
+
+  setLED(7, 3, 3, red, green, blue);
+  setLED(7, 3, 4, red, green, blue);
+  setLED(7, 4, 3, red, green, blue);
+  setLED(7, 4, 4, red, green, blue);
+}
+
+void largeSphere(byte red, byte green, byte blue) {
+  setLED(1, 3, 3, red, green, blue);
+  setLED(1, 3, 4, red, green, blue);
+  setLED(1, 4, 3, red, green, blue);
+  setLED(1, 4, 4, red, green, blue);
+
+  setLED(2, 2, 3, red, green, blue);
+  setLED(2, 2, 4, red, green, blue);
+  setLED(2, 3, 2, red, green, blue);
+  setLED(2, 3, 5, red, green, blue);
+  setLED(2, 4, 2, red, green, blue);
+  setLED(2, 4, 5, red, green, blue);
+  setLED(2, 5, 3, red, green, blue);
+  setLED(2, 5, 4, red, green, blue);
+  setLED(2, 5, 4, red, green, blue);
+
+  setLED(3, 1, 3, red, green, blue);
+  setLED(3, 1, 4, red, green, blue);
+  setLED(3, 3, 1, red, green, blue);
+  setLED(3, 3, 6, red, green, blue);
+  setLED(3, 4, 1, red, green, blue);
+  setLED(3, 4, 6, red, green, blue);
+  setLED(3, 6, 3, red, green, blue);
+  setLED(3, 6, 4, red, green, blue);
+
+  setLED(4, 1, 3, red, green, blue);
+  setLED(4, 1, 4, red, green, blue);
+  setLED(4, 3, 1, red, green, blue);
+  setLED(4, 3, 6, red, green, blue);
+  setLED(4, 4, 1, red, green, blue);
+  setLED(4, 4, 6, red, green, blue);
+  setLED(4, 6, 3, red, green, blue);
+  setLED(4, 6, 4, red, green, blue);
+
+  setLED(5, 2, 3, red, green, blue);
+  setLED(5, 2, 4, red, green, blue);
+  setLED(5, 3, 2, red, green, blue);
+  setLED(5, 3, 5, red, green, blue);
+  setLED(5, 4, 2, red, green, blue);
+  setLED(5, 4, 5, red, green, blue);
+  setLED(5, 5, 3, red, green, blue);
+  setLED(5, 5, 4, red, green, blue);
+
+  setLED(6, 3, 3, red, green, blue);
+  setLED(6, 3, 4, red, green, blue);
+  setLED(6, 4, 3, red, green, blue);
+  setLED(6, 4, 4, red, green, blue);
+}
+
+void mediumSphere(byte red, byte green, byte blue) {
+  setLED(2, 3, 3, red, green, blue);
+  setLED(2, 3, 4, red, green, blue);
+  setLED(2, 4, 3, red, green, blue);
+  setLED(2, 4, 4, red, green, blue);
+
+  setLED(3, 2, 3, red, green, blue);
+  setLED(3, 2, 4, red, green, blue);
+  setLED(3, 3, 2, red, green, blue);
+  setLED(3, 3, 5, red, green, blue);
+  setLED(3, 4, 2, red, green, blue);
+  setLED(3, 4, 5, red, green, blue);
+  setLED(3, 5, 3, red, green, blue);
+  setLED(3, 5, 4, red, green, blue);
+
+  setLED(4, 2, 3, red, green, blue);
+  setLED(4, 2, 4, red, green, blue);
+  setLED(4, 3, 2, red, green, blue);
+  setLED(4, 3, 5, red, green, blue);
+  setLED(4, 4, 2, red, green, blue);
+  setLED(4, 4, 5, red, green, blue);
+  setLED(4, 5, 3, red, green, blue);
+  setLED(4, 5, 4, red, green, blue);
+
+  setLED(5, 3, 3, red, green, blue);
+  setLED(5, 3, 4, red, green, blue);
+  setLED(5, 4, 3, red, green, blue);
+  setLED(5, 4, 4, red, green, blue);
+}
+
+void smallSphere(byte red, byte green, byte blue) {
+  setLED(3, 3, 3, red, green, blue);
+  setLED(3, 3, 4, red, green, blue);
+  setLED(3, 4, 3, red, green, blue);
+  setLED(3, 4, 4, red, green, blue);
+
+  setLED(4, 3, 3, red, green, blue);
+  setLED(4, 3, 4, red, green, blue);
+  setLED(4, 4, 3, red, green, blue);
+  setLED(4, 4, 4, red, green, blue);
+}
+
+void growSphere(byte red, byte green, byte blue, float speedMultiplier = 1.0) {
+  smallSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  smallSphere(0, 0, 0);
+  mediumSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+  largeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+  xLargeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  xLargeSphere(0, 0, 0);
+  largeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  largeSphere(0, 0, 0);
+  mediumSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+}
+
+void explodeSphere(byte red, byte green, byte blue, float speedMultiplier = 1.0) {
+  smallSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  smallSphere(0, 0, 0);
+  mediumSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+  largeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+  xLargeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  xLargeSphere(0, 0, 0);
+  generateOutline(8, red, green, blue, 0);
+  delay(int(getBeatDivision(speedMultiplier)));
+  generateOutline(8, 0, 0, 0, 0);
+  largeSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  largeSphere(0, 0, 0);
+  mediumSphere(red, green, blue);
+  delay(int(getBeatDivision(speedMultiplier)));
+  mediumSphere(0, 0, 0);
+}
+
+void sphereExplode(int duration, float speedMultiplier = 1.0) {
+  start = millis();
+  while (millis() - start < duration) {
+    growSphere(15, 0, 0, speedMultiplier);
+    growSphere(0, 15, 0, speedMultiplier);
+    growSphere(0, 0, 15, speedMultiplier);
+    growSphere(15, 0, 0, speedMultiplier);
+
+    explodeSphere(0, 15, 0, speedMultiplier);
+    explodeSphere(0, 0, 15, speedMultiplier);
+    explodeSphere(15, 0, 0, speedMultiplier);
+    explodeSphere(0, 15, 0, speedMultiplier);
+  }
+}
+
   int ii, jj, kk;
   for (ii=0; ii < 8; ii++) {
     for (jj=0; jj < 8; jj++) {
@@ -2405,6 +2641,8 @@ void loop() {
   // clean();
   // lineMovement(getBeatDivision(32));
   bouncyBalls(getBeatDivision(16), DIVISOR_16);
+  clean();
+  sphereExplode(getBeatDivision(16), DIVISOR_8);
   clean();
   // clean();
   // fireworks(20, 15, 0);
