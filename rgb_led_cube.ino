@@ -47,7 +47,7 @@ unsigned long start; // Millisecond timer to cycle through the animations
 
 
 const int CUBE_SIZE = 8;
-const int TEMPO = 126; // bpm
+const int TEMPO = 130; // bpm
 
 const float DIVISOR_4 = 0.25;
 const float DIVISOR_8 = 0.125;
@@ -55,8 +55,8 @@ const float DIVISOR_16 = 0.0625;
 const float DIVISOR_32 = 0.03125;
 const float DIVISOR_64 = 0.015625;
 const float DIVISOR_128 = 0.0078125;
-const float THIRD_DIVISOR = 0.333333333;
-const float SIXTH_DIVISOR = 0.166666667;
+const float DIVISOR_3 = 0.333333333;
+const float DIVISOR_6 = 0.166666667;
 
 
 int getBeat() {
