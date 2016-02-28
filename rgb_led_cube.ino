@@ -1901,6 +1901,196 @@ void bouncyBalls(int duration, float speedMultiplier = 1.0) {
   }
 }
 
+void bouncySpheres(int duration, float speedMultiplier = 1.0) {
+  int greenmult   = 1, bluemult   = 1, redmult  = 1;
+  int greenmulty  = 1, bluemulty  = 1, redmulty = 1;
+  int oredx, oredy, obluex, obluey, ogreenx, ogreeny;
+  int cb1 = 15, cb2 = 0, cr1 = 15 , cr2 = 0, cg1 = 15, cg2 = 0;
+  int time_counter = 10, timemult = 2;
+  int m;
+  int c1 = 1, c2 = 1, c3 = 1;
+  int xmult = 1, ymult = 1, zmult = 1;
+  int x = 4, y = 4, z = 4;
+  int color_select, xo, yo, zo;
+  int c21 = 1, c22 = 1, c23 = 1;
+  int x2mult = 1, y2mult = 1, z2mult = 1;
+  int x2 = 2, y2 = 2, z2 = 2;
+  int color_select2, x2o, y2o, z2o;
+
+  int counter, i, j, k;
+
+  start = millis();
+  while (millis() - start < duration) {
+    color_select = random(0, 3);
+    if (color_select == 0) {
+      c1 = 0;
+      c2 = random(0, 16);
+      c3 = random(0, 16);
+    }
+    if (color_select == 1) {
+      c1 = random(0, 16);
+      c2 = 0;
+      c3 = random(0, 16);
+    }
+    if (color_select == 2) {
+      c1 = random(0, 16);
+      c2 = random(0, 16);
+      c3 = 0;
+    }
+
+    color_select2 = random(0, 3);
+    if (color_select2 == 0) {
+      c21 = 0;
+      c22 = random(0, 16);
+      c23 = random(0, 16);
+    }
+    if (color_select2 == 1) {
+      c21 = random(0, 16);
+      c22 = 0;
+      c23 = random(0, 16);
+    }
+    if (color_select2 == 2) {
+      c21 = random(0, 16);
+      c22 = random(0, 16);
+      c23 = 0;
+    }
+
+    for (counter=0; counter < 200; counter++) {
+      setLED(x + 1, y + 1,  z + 1,  c1,   c2,   c3);
+      setLED(x + 1, y + 1,  z + 2,  c1,   c2,   c3);
+      setLED(x + 1, y + 2,  z + 1,  c1,   c2,   c3);
+      setLED(x + 1, y + 2,  z + 2,  c1,   c2,   c3);
+      setLED(x - 2, y + 1,  z + 1,  c1,   c2,   c3);
+      setLED(x - 2, y + 1,  z + 2,  c1,   c2,   c3);
+      setLED(x - 2, y + 2,  z + 1,  c1,   c2,   c3);
+      setLED(x - 2, y + 2,  z + 2,  c1,   c2,   c3);
+      setLED(x,     y + 1,  z,      c1,   c2,   c3);
+      setLED(x,     y + 2,  z,      c1,   c2,   c3);
+      setLED(x - 1, y + 1,  z,      c1,   c2,   c3);
+      setLED(x - 1, y + 2,  z,      c1,   c2,   c3);
+      setLED(x,     y + 1,  z + 3,  c1,   c2,   c3);
+      setLED(x,     y + 2,  z + 3,  c1,   c2,   c3);
+      setLED(x - 1, y + 1,  z + 3,  c1,   c2,   c3);
+      setLED(x - 1, y + 2,  z + 3,  c1,   c2,   c3);
+      setLED(x,     y,      z + 1,  c1,   c2,   c3);
+      setLED(x,     y,      z + 2,  c1,   c2,   c3);
+      setLED(x - 1, y,      z + 1,  c1,   c2,   c3);
+      setLED(x - 1, y,      z + 2,  c1,   c2,   c3);
+      setLED(x,     y + 3,  z + 1,  c1,   c2,   c3);
+      setLED(x,     y + 3,  z + 2,  c1,   c2,   c3);
+      setLED(x - 1, y + 3,  z + 1,  c1,   c2,   c3);
+      setLED(x - 1, y + 3,  z + 2,  c1,   c2,   c3);
+
+      setLED(x2 + 1, y2 + 1,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2 + 1, y2 + 1,  z2 + 2,  c21,   c22,   c23);
+      setLED(x2 + 1, y2 + 2,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2 + 1, y2 + 2,  z2 + 2,  c21,   c22,   c23);
+      setLED(x2 - 2, y2 + 1,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2 - 2, y2 + 1,  z2 + 2,  c21,   c22,   c23);
+      setLED(x2 - 2, y2 + 2,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2 - 2, y2 + 2,  z2 + 2,  c21,   c22,   c23);
+      setLED(x2,     y2 + 1,  z2,      c21,   c22,   c23);
+      setLED(x2,     y2 + 2,  z2,      c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 1,  z2,      c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 2,  z2,      c21,   c22,   c23);
+      setLED(x2,     y2 + 1,  z2 + 3,  c21,   c22,   c23);
+      setLED(x2,     y2 + 2,  z2 + 3,  c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 1,  z2 + 3,  c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 2,  z2 + 3,  c21,   c22,   c23);
+      setLED(x2,     y2,      z2 + 1,  c21,   c22,   c23);
+      setLED(x2,     y2,      z2 + 2,  c21,   c22,   c23);
+      setLED(x2 - 1, y2,      z2 + 1,  c21,   c22,   c23);
+      setLED(x2 - 1, y2,      z2 + 2,  c21,   c22,   c23);
+      setLED(x2,     y2 + 3,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2,     y2 + 3,  z2 + 2,  c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 3,  z2 + 1,  c21,   c22,   c23);
+      setLED(x2 - 1, y2 + 3,  z2 + 2,  c21,   c22,   c23);
+
+      x2o = x2;
+      y2o = y2;
+      z2o = z2;
+
+      xo = x;
+      yo = y;
+      zo = z;
+
+      delay(getBeatDivision(speedMultiplier));
+
+      setLED(x + 1, y + 1,  z + 1,  0, 0, 0);
+      setLED(x + 1, y + 1,  z + 2,  0, 0, 0);
+      setLED(x + 1, y + 2,  z + 1,  0, 0, 0);
+      setLED(x + 1, y + 2,  z + 2,  0, 0, 0);
+      setLED(x - 2, y + 1,  z + 1,  0, 0, 0);
+      setLED(x - 2, y + 1,  z + 2,  0, 0, 0);
+      setLED(x - 2, y + 2,  z + 1,  0, 0, 0);
+      setLED(x - 2, y + 2,  z + 2,  0, 0, 0);
+      setLED(x,     y + 1,  z,      0, 0, 0);
+      setLED(x,     y + 2,  z,      0, 0, 0);
+      setLED(x - 1, y + 1,  z,      0, 0, 0);
+      setLED(x - 1, y + 2,  z,      0, 0, 0);
+      setLED(x,     y + 1,  z + 3,  0, 0, 0);
+      setLED(x,     y + 2,  z + 3,  0, 0, 0);
+      setLED(x - 1, y + 1,  z + 3,  0, 0, 0);
+      setLED(x - 1, y + 2,  z + 3,  0, 0, 0);
+      setLED(x,     y,      z + 1,  0, 0, 0);
+      setLED(x,     y,      z + 2,  0, 0, 0);
+      setLED(x - 1, y,      z + 1,  0, 0, 0);
+      setLED(x - 1, y,      z + 2,  0, 0, 0);
+      setLED(x,     y + 3,  z + 1,  0, 0, 0);
+      setLED(x,     y + 3,  z + 2,  0, 0, 0);
+      setLED(x - 1, y + 3,  z + 1,  0, 0, 0);
+      setLED(x - 1, y + 3,  z + 2,  0, 0, 0);
+
+      setLED(x2 + 1, y2 + 1,  z2 + 1,  0, 0, 0);
+      setLED(x2 + 1, y2 + 1,  z2 + 2,  0, 0, 0);
+      setLED(x2 + 1, y2 + 2,  z2 + 1,  0, 0, 0);
+      setLED(x2 + 1, y2 + 2,  z2 + 2,  0, 0, 0);
+      setLED(x2 - 2, y2 + 1,  z2 + 1,  0, 0, 0);
+      setLED(x2 - 2, y2 + 1,  z2 + 2,  0, 0, 0);
+      setLED(x2 - 2, y2 + 2,  z2 + 1,  0, 0, 0);
+      setLED(x2 - 2, y2 + 2,  z2 + 2,  0, 0, 0);
+      setLED(x2,     y2 + 1,  z2,      0, 0, 0);
+      setLED(x2,     y2 + 2,  z2,      0, 0, 0);
+      setLED(x2 - 1, y2 + 1,  z2,      0, 0, 0);
+      setLED(x2 - 1, y2 + 2,  z2,      0, 0, 0);
+      setLED(x2,     y2 + 1,  z2 + 3,  0, 0, 0);
+      setLED(x2,     y2 + 2,  z2 + 3,  0, 0, 0);
+      setLED(x2 - 1, y2 + 1,  z2 + 3,  0, 0, 0);
+      setLED(x2 - 1, y2 + 2,  z2 + 3,  0, 0, 0);
+      setLED(x2,     y2,      z2 + 1,  0, 0, 0);
+      setLED(x2,     y2,      z2 + 2,  0, 0, 0);
+      setLED(x2 - 1, y2,      z2 + 1,  0, 0, 0);
+      setLED(x2 - 1, y2,      z2 + 2,  0, 0, 0);
+      setLED(x2,     y2 + 3,  z2 + 1,  0, 0, 0);
+      setLED(x2,     y2 + 3,  z2 + 2,  0, 0, 0);
+      setLED(x2 - 1, y2 + 3,  z2 + 1,  0, 0, 0);
+      setLED(x2 - 1, y2 + 3,  z2 + 2,  0, 0, 0);
+
+      x = x + xmult;
+      y = y + ymult;
+      z = z + zmult;
+
+      x2 = x2 + x2mult;
+      y2 = y2 + y2mult;
+      z2 = z2 + z2mult;
+
+      if (x >= 7)   xmult = random(-1, 1);
+      if (y >= 7)   ymult = random(-1, 1);
+      if (z >= 7)   zmult = random(-1, 1);
+      if (x <= 0)   xmult = random(0, 2);
+      if (y <= 0)   ymult = random(0, 2);
+      if (z <= 0)   zmult = random(0, 2);
+
+      if (x2 >= 7)  x2mult = random(-1, 1);
+      if (y2 >= 7)  y2mult = random(-1, 1);
+      if (z2 >= 7)  z2mult = random(-1, 1);
+      if (x2 <= 0)  x2mult = random(0, 2);
+      if (y2 <= 0)  y2mult = random(0, 2);
+      if (z <= 0)   z2mult = random(0, 2);
+    }
+  }
+}
+
 void upDownArrows(int duration, float speedMultiplier = 1.0) {
   int greenx  = random(1, 7), greeny  = random(1, 7);
   int bluex   = random(1, 7), bluey   = random(1, 7);
