@@ -2920,6 +2920,42 @@ void draw(int letterArray[8][8], byte red, byte green, byte blue) {
   }
 }
 
+void drawMansionFace() {
+  draw(letterM, 15, 0, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterA, 0, 15, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterN, 0, 0, 15);
+  delay(getBeatDivision());
+  clean();
+  draw(letterS, 15, 0, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterI, 0, 15, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterO, 0, 0, 15);
+  delay(getBeatDivision());
+  clean();
+  draw(letterN, 15, 0, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterF, 0, 15, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterA, 0, 0, 15);
+  delay(getBeatDivision());
+  clean();
+  draw(letterC, 15, 0, 0);
+  delay(getBeatDivision());
+  clean();
+  draw(letterE, 0, 15, 0);
+  delay(getBeatDivision());
+  clean();
+}
+
 void loop() {
   // colorWheelVertical(getBeatDivision(16), DIVISOR_4);
   // clean();
