@@ -47,10 +47,29 @@ unsigned long start; // Millisecond timer to cycle through the animations
 
 
 const int CUBE_SIZE = 8;
-const int TEMPO = 120; // bpm
+const int TEMPO = 126; // bpm
 
-int getTempoDelay() {
-  return 60000 / TEMPO;
+const float FOURTH_DIVISOR = 0.25;
+const float EIGHTH_DIVISOR = 0.125;
+const float SIXTEENTH_DIVISOR = 0.0625;
+const float THIRD_DIVISOR = 0.333333333;
+const float SIXTH_DIVISOR = 0.166666667;
+
+
+int getBeat() {
+  return int(60000 / TEMPO);
+}
+
+int getBeatDivision(float multiplier = 1.00) {
+  return int(getBeat() * multiplier);
+}
+
+int getBeatPerLayer() {
+  return int(getBeatDivision(1.00 / CUBE_SIZE));
+}
+
+int getBeatDivisionPerLayer(float multiplier = 1.00) {
+  return int(getBeatPerLayer() * multiplier);
 }
 
 void setup() {
@@ -103,21 +122,6 @@ void setup() {
 
   SPI.begin();
   interrupts(); // Start multiplexing
-}
-
-void loop() {
-  colorWheelVertical();
-  // clean();
-  // folder();
-  // clean();
-  // colorWheel();
-  // clean();
-  // bouncyBalls();
-  // clean();
-  // wipeOut();
-  // snake();
-  // clean();
-  // fireworks(20, 15, 0);
 }
 
 void setLED(int level, int row, int column, byte red, byte green, byte blue) {
@@ -1355,13 +1359,12 @@ void sinwaveTwo() {
   }
 }
 
-void colorWheelVertical() {
+void colorWheelVertical(float speedMultiplier = 1.0) {
   int xx, yy, zz, ww;
   int rr = 1, gg = 1, bb = 1;
   int ranx, rany, swiper;
 
   int duration = 10000;
-  int pause = 30;
 
   start = millis();
 
@@ -1370,59 +1373,58 @@ void colorWheelVertical() {
     ranx    = random(16);
     rany    = random(16);
 
-    for (xx=0; xx < 8; xx++) {
-      for (yy=0; yy < 8; yy++) {
-        for (zz=0; zz < 8; zz++) {
+    for (xx=0; xx < CUBE_SIZE; xx++) {
+      for (yy=0; yy < CUBE_SIZE; yy++) {
+        for (zz=0; zz < CUBE_SIZE; zz++) {
           setLED(xx, yy, zz,  ranx, 0, rany);
         }
       }
-      delay(pause);
+      delay(getBeatDivisionPerLayer(speedMultiplier));
     }
 
     ranx = random(16);
     rany = random(16);
 
     for (xx=7; xx >= 0; xx--) {
-      for (yy=0; yy < 8; yy++) {
-        for (zz=0; zz < 8; zz++) {
+      for (yy=0; yy < CUBE_SIZE; yy++) {
+        for (zz=0; zz < CUBE_SIZE; zz++) {
           setLED(xx,yy, zz, ranx, rany, 0);
         }
       }
-      delay(pause);
+      delay(getBeatDivisionPerLayer(speedMultiplier));
     }
 
     ranx = random(16);
     rany = random(16);
-    for (xx=0; xx < 8; xx++) {
-      for (yy=0; yy < 8; yy++) {
-        for (zz=0; zz < 8; zz++) {
-          setLED(xx,yy, zz, 0, ranx, rany);
+    for (xx=0; xx < CUBE_SIZE; xx++) {
+      for (yy=0; yy < CUBE_SIZE; yy++) {
+        for (zz=0; zz < CUBE_SIZE; zz++) {
+          setLED(xx, yy, zz, 0, ranx, rany);
         }
       }
-      delay(pause);
+      delay(getBeatDivisionPerLayer(speedMultiplier));
     }
 
     ranx = random(16);
     rany = random(16);
 
     for (xx=7; xx >= 0; xx--) {
-      for (yy=0; yy < 8; yy++) {
-        for (zz=0; zz < 8; zz++) {
-          setLED(xx,yy, zz, rany, ranx, 0);
+      for (yy=0; yy < CUBE_SIZE; yy++) {
+        for (zz=0; zz < CUBE_SIZE; zz++) {
+          setLED(xx, yy, zz, rany, ranx, 0);
         }
       }
-      delay(pause);
+      delay(getBeatDivisionPerLayer(speedMultiplier));
     }
   }
 }
 
-void colorWheel() {
+void colorWheel(float speedMultiplier = 1.0) {
   int xx, yy, zz, ww;
   int rr = 1, gg = 1, bb = 1;
   int ranx, rany, ranz, select, swiper;
 
   int duration = 10000;
-  int pause = 10;
 
   start = millis();
 
@@ -1453,7 +1455,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (swiper==1) {//bot to top
@@ -1463,7 +1465,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (swiper==2) {//back to front
@@ -1473,7 +1475,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (swiper==3) {
@@ -1483,7 +1485,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (swiper==4) {//top to bot
@@ -1493,7 +1495,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
     if (swiper==5) {//front to back
@@ -1503,7 +1505,7 @@ void colorWheel() {
             setLED(xx, yy, zz,  ranx, ranz, rany);
           }
         }
-        delay(pause);
+        delay(getBeatDivisionPerLayer(speedMultiplier));
       }
     }
   }
@@ -2107,7 +2109,6 @@ void generateOutline(int pause, int outlineSize, byte red, byte green, byte blue
   }
 }
 
-
 void outlineSlow() {
   int pause = 150;
 
@@ -2137,45 +2138,48 @@ void outlineSlow() {
   generateOutline(pause, 2, 0, 15, 0);
 }
 
-void cardboardBox() {
-  int pause = int(getTempoDelay() / 4);
+void cardboardBox(int duration, float speedMultiplier = 1.0) {
+  start = millis();
+  while (millis() - start < duration) {
+    generateOutline(0, 8, 0, 0, 15);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 8, 0, 0, 0);
+    generateOutline(0, 6, 0, 3, 11);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 6, 0, 0, 0);
+    generateOutline(0, 4, 0, 7, 7);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 4, 0, 0, 0);
+    generateOutline(0, 2, 0, 11, 3);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 2, 0, 0, 0);
+    generateOutline(0, 4, 0, 15, 0);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 4, 0, 0, 0);
+    generateOutline(0, 6, 3, 11, 0);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 6, 0, 0, 0);
+    generateOutline(0, 8, 7, 7, 0);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 8, 0, 0, 0);
+    generateOutline(0, 6, 11, 3, 0);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 6, 0, 0, 0);
+    generateOutline(0, 4, 15, 0, 0);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 4, 0, 0, 0);
+    generateOutline(0, 2, 11, 0, 3);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 2, 0, 0, 0);
+    generateOutline(0, 4, 7, 0, 7);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 4, 0, 0, 0);
+    generateOutline(0, 6, 3, 0, 11);
+    delay(getBeatDivision(speedMultiplier));
+    generateOutline(0, 6, 0, 0, 0);
+  }
 
-  generateOutline(0, 8, 0, 0, 15);
-  delay(pause);
-  generateOutline(0, 8, 0, 0, 0);
-  generateOutline(0, 6, 0, 3, 11);
-  delay(pause);
-  generateOutline(0, 6, 0, 0, 0);
-  generateOutline(0, 4, 0, 7, 7);
-  delay(pause);
-  generateOutline(0, 4, 0, 0, 0);
-  generateOutline(0, 2, 0, 11, 3);
-  delay(pause);
-  generateOutline(0, 2, 0, 0, 0);
-  generateOutline(0, 4, 0, 15, 0);
-  delay(pause);
-  generateOutline(0, 4, 0, 0, 0);
-  generateOutline(0, 6, 3, 11, 0);
-  delay(pause);
-  generateOutline(0, 6, 0, 0, 0);
-  generateOutline(0, 8, 7, 7, 0);
-  delay(pause);
-  generateOutline(0, 8, 0, 0, 0);
-  generateOutline(0, 6, 11, 3, 0);
-  delay(pause);
-  generateOutline(0, 6, 0, 0, 0);
-  generateOutline(0, 4, 15, 0, 0);
-  delay(pause);
-  generateOutline(0, 4, 0, 0, 0);
-  generateOutline(0, 2, 11, 0, 3);
-  delay(pause);
-  generateOutline(0, 2, 0, 0, 0);
-  generateOutline(0, 4, 7, 0, 7);
-  delay(pause);
-  generateOutline(0, 4, 0, 0, 0);
-  generateOutline(0, 6, 3, 0, 11);
-  delay(pause);
-  generateOutline(0, 6, 0, 0, 0);
+  clean();
 }
 
 void clean() {
@@ -2187,4 +2191,21 @@ void clean() {
       }
     }
   }
+}
+
+void loop() {
+  // colorWheelVertical(64);
+  // clean();
+  // folder();
+  // clean();
+  // colorWheel();
+  // clean();
+  // bouncyBalls();
+  // clean();
+  // wipeOut();
+  // snake();
+  // clean();
+  // fireworks(20, 15, 0);
+  // cardboardBox(getBeatDivision(32));
+  // cardboardBox(getBeatDivision(16), EIGHTH_DIVISOR);
 }
