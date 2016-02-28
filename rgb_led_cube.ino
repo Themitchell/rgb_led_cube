@@ -569,69 +569,41 @@ void wipeOut() {
   }
 }
 
-void rainVersionTwo() {
+void rain(int duration) {
   int x[64],    y[64],    z[64];
   int xx[64],   yy[64],   zz[64];
   int xold[64], yold[64], zold[64];
-  int addr, ledcolor, colowheel, slowdown;
+  int addr, colowheel, slowdown;
   int leds = 64;
   int bright = 1;
 
   for (addr=0; addr < 64; addr++) {
-    x[addr]   = random(8);
-    y[addr]   = random(8);
-    z[addr]   = random(8);
+    x[addr]   = random(16);
+    y[addr]   = random(16);
+    z[addr]   = random(16);
     xx[addr]  = random(16);
     yy[addr]  = random(16);
     zz[addr]  = random(16);
   }
   start = millis();
-  while (millis() - start < 20000) {
-    //wipe_out();
-    //for (addr=0; addr<leds; addr++)
-    //setLED(zold[addr], xold[addr], yold[addr], 0, 0, 0);
-
-    if (ledcolor < 200) {
-      for (addr=0; addr < leds; addr++) {
-        setLED(zold[addr], xold[addr], yold[addr], 0, 0, 0);
-        if (z[addr] >= 7) { setLED(z[addr], x[addr], y[addr], 0,  5, 15); }
-        if (z[addr] == 6) { setLED(z[addr], x[addr], y[addr], 0,  1, 9);  }
-        if (z[addr] == 5) { setLED(z[addr], x[addr], y[addr], 0,  0, 10); }
-        if (z[addr] == 4) { setLED(z[addr], x[addr], y[addr], 1,  0, 11); }
-        if (z[addr] == 3) { setLED(z[addr], x[addr], y[addr], 3,  0, 12); }
-        if (z[addr] == 2) { setLED(z[addr], x[addr], y[addr], 10, 0, 15); }
-        if (z[addr] == 1) { setLED(z[addr], x[addr], y[addr], 10, 0, 10); }
-        if (z[addr] <= 0) { setLED(z[addr], x[addr], y[addr], 10, 0, 1);  }
-      }
+  while (millis() - start < duration) {
+    for (addr=0; addr < leds; addr++) {
+      setLED(zold[addr], xold[addr], yold[addr], 0, 0, 0);
+      if (z[addr] >= 7) setLED(z[addr], x[addr], y[addr], 0,  5, 15);
+      if (z[addr] == 6) setLED(z[addr], x[addr], y[addr], 0,  1, 9);
+      if (z[addr] == 5) setLED(z[addr], x[addr], y[addr], 0,  0, 10);
+      if (z[addr] == 4) setLED(z[addr], x[addr], y[addr], 1,  0, 11);
+      if (z[addr] == 3) setLED(z[addr], x[addr], y[addr], 3,  0, 12);
+      if (z[addr] == 2) setLED(z[addr], x[addr], y[addr], 10, 0, 15);
+      if (z[addr] == 1) setLED(z[addr], x[addr], y[addr], 10, 0, 10);
+      if (z[addr] <= 0) setLED(z[addr], x[addr], y[addr], 10, 0, 1);
     }
-
-    if (ledcolor >= 200 && ledcolor < 300) {
-      for (addr=0; addr < leds; addr++) {
-        setLED(zold[addr], xold[addr], yold[addr], 0, 0, 0);
-        if (z[addr] >= 7) { setLED(z[addr], x[addr], y[addr], 15, 15, 0); }
-        if (z[addr] == 6) { setLED(z[addr], x[addr], y[addr], 10, 10, 0); }
-        if (z[addr] == 5) { setLED(z[addr], x[addr], y[addr], 15, 5,  0); }
-        if (z[addr] == 4) { setLED(z[addr], x[addr], y[addr], 15, 2,  0); }
-        if (z[addr] == 3) { setLED(z[addr], x[addr], y[addr], 15, 1,  0); }
-        if (z[addr] == 2) { setLED(z[addr], x[addr], y[addr], 15, 0,  0); }
-        if (z[addr] == 1) { setLED(z[addr], x[addr], y[addr], 12, 0,  0); }
-        if (z[addr] <= 0) { setLED(z[addr], x[addr], y[addr], 10, 0,  0); }
-      }
-    }
-
-    if (ledcolor >= 300 && ledcolor < 400) {}
-    if (ledcolor >= 500 && ledcolor < 600) {}
-
-    ledcolor++;
-    if (ledcolor >= 300) { ledcolor=0; }
 
     for (addr=0; addr < leds; addr++) {
       xold[addr] = x[addr];
       yold[addr] = y[addr];
       zold[addr] = z[addr];
     }
-
-    delay(15);
 
     for (addr=0; addr < leds; addr++) {
       //slowdown = random(2);
@@ -2380,4 +2352,5 @@ void loop() {
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
   // cardboardBox(getBeatDivision(16), DIVISOR_8);
+  rain(getBeatDivision(32));
 }
