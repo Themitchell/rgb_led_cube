@@ -1525,7 +1525,7 @@ void colorWheel(int duration, float speedMultiplier = 1.0) {
   }
 }
 
-void lineMovement() {
+void lineMovement(int duration) {
   int greenx  = random(1, 7), greeny  = random(1, 7);
   int bluex   = random(1, 7), bluey   = random(1, 7);
   int redx    = random(1, 7), redy    = random(1, 7);
@@ -1544,181 +1544,310 @@ void lineMovement() {
   int x2 = 2, y2 = 2, z2 = 2;
   int color_select2, x2o, y2o, z2o;
 
-  int counter, i, j, k;
-  for (counter=0; counter < 150; counter++) {
-    for (i=0; i < 8; i++) {
-      setLED(i, oredx, oredx, 0, 0, 0);
-    }
-    for (i=0; i < 8; i++) {
-      setLED(i, redx, redx, 15, 0, 0);
-    }
+  start = millis();
+  while (millis() - start < duration) {
+    int counter, i, j, k;
 
-    oredx = redx;
-    oredy = redy;
-
-    for (i=100; i > time_counter; i--) delay(1);
-
-    time_counter = time_counter + timemult;
-    if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
-    if (redy > 6 || redy < 1) redmulty = redmulty * -1;
-
-    if (redx > 6 || redx < 1) {
-      redmult = redmult*-1;
-
-      cr1 = random(16);
-      cr2 = random(16);
-    }
-
-    redy = redy + redmulty;
-    redx = redx + redmult;
-  }
-
-  for (counter=0; counter < 85; counter++) {
-    for (i=0; i < 8; i++) {
-      setLED(i,        oredx,  oredx,    0, 0, 0);
-      setLED(ogreenx,  i,      ogreeny,  0, 0, 0);
-    }
-    for (i=0; i < 8; i++) {
-      setLED(i,      redx, redx,   15, 0,  0);
-      setLED(greenx, i,    greeny, 0,  15, 0);
-    }
-    ogreenx = greenx;
-    ogreeny = greeny;
-    oredx = redx;
-    oredy = redy;
-
-    for (i=100; i > time_counter; i--) delay(1);
-
-    time_counter = time_counter + timemult;
-    if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
-    if (greeny > 6 || greeny < 1) greenmulty = greenmulty * -1;
-    if (redy > 6 || redy < 1) redmulty = redmulty * -1;
-
-    if (greenx > 6 || greenx < 1) {
-      greenmult = greenmult * -1;
-      greeny = greeny + greenmulty;
-      cg1 = random(16);
-      cg2 = random(16);
-    }
-
-    if (redx > 6 || redx < 1) {
-      redmult = redmult * -1;
-
-      cr1 = random(16);
-      cr2 = random(16);
-    }
-
-    greenx = greenx + greenmult;
-    redy = redy + redmulty;
-    redx = redx + redmult;
-  }
-
-  for (counter=0; counter < 85; counter++) {
-    for (i=0; i < 8; i++) {
-      setLED(i, oredx, oredx, 0, 0, 0);
-      setLED(obluey, obluex, i, 0, 0, 0);
-      setLED(ogreenx, i, ogreeny, 0, 0, 0);
-    }
-    for (i=0; i < 8; i++) {
-      setLED(i, redx, redx, 15, 0, 0);
-      setLED(bluey, bluex, i, 0, 0, 15);
-      setLED(greenx, i, greeny, 0, 15, 0);
-    }
-    ogreenx = greenx;
-    ogreeny = greeny;
-    obluex = bluex;
-    obluey = bluey;
-    oredx = redx;
-    oredy = redy;
-
-    for (i=100; i > time_counter; i--) delay(1);
-
-    time_counter = time_counter + timemult;
-    if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
-    if (greeny > 6 || greeny < 1) greenmulty = greenmulty * -1;
-    if (bluey > 6 || bluey < 1) bluemulty = bluemulty * -1;
-    if (redy > 6 || redy < 1) redmulty = redmulty * -1;
-
-    if (greenx > 6 || greenx < 1) {
-      greenmult = greenmult * -1;
-      greeny = greeny + greenmulty;
-      cg1 = random(16);
-      cg2 = random(16);
-    }
-    if (bluex > 6 || bluex < 1) {
-      bluemult = bluemult * -1;
-      bluey = bluey + bluemulty;
-      cb1 = random(16);
-      cb2 = random(16);
-    }
-    if (redx > 6 || redx < 1) {
-      redmult = redmult * -1;
-      cr1 = random(16);
-      cr2 = random(16);
-    }
-
-    greenx = greenx + greenmult;
-    bluex = bluex + bluemult;
-    redy = redy + redmulty;
-    redx = redx + redmult;
-  }
-}
-
-void risingSweepWhite() {
-  int counter, i, j, k;
-
-  for (counter=0; counter < 3; counter++) { // counter was 3
-    for (i=0; i < 8; i++) {
-      for (j=0; j < 8; j++) {
-        for (k=0; k < 8; k++) {
-          setLED(i, j, k, 8, 15, 15);// red too intense to make white at 15. Reduced to 8 - makes nice white level.
-          delay(1);
-        }
+    for (counter=0; counter < 150; counter++) {
+      for (i=0; i < 8; i++) {
+        setLED(i, oredx, oredx, 0, 0, 0);
       }
-    }
-    for (i=0; i < 8; i++) {
-      for (j=0; j < 8; j++) {
-        for (k=0; k < 8; k++) {
-          setLED(i, j, k, 0, 0, 0);
-          delay(1);
-        }
+      for (i=0; i < 8; i++) {
+        setLED(i, redx, redx, 15, 0, 0);
       }
+
+      oredx = redx;
+      oredy = redy;
+
+      for (i=100; i > time_counter; i--) {
+        delay(1);
+      }
+
+      time_counter = time_counter + timemult;
+      if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
+      if (redy > 6 || redy < 1) redmulty = redmulty * -1;
+
+      if (redx > 6 || redx < 1) {
+        redmult = redmult*-1;
+
+        cr1 = random(16);
+        cr2 = random(16);
+      }
+
+      redy = redy + redmulty;
+      redx = redx + redmult;
+    }
+
+    for (counter=0; counter < 125; counter++) {
+      for (i=0; i < 8; i++) {
+        setLED(i,        oredx,  oredx,    0, 0, 0);
+        setLED(ogreenx,  i,      ogreeny,  0, 0, 0);
+      }
+      for (i=0; i < 8; i++) {
+        setLED(i,      redx, redx,   15, 0,  0);
+        setLED(greenx, i,    greeny, 0,  15, 0);
+      }
+      ogreenx = greenx;
+      ogreeny = greeny;
+      oredx = redx;
+      oredy = redy;
+
+      for (i=100; i > time_counter; i--) {
+        delay(1);
+      }
+
+      time_counter = time_counter + timemult;
+      if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
+      if (greeny > 6 || greeny < 1) greenmulty = greenmulty * -1;
+      if (redy > 6 || redy < 1) redmulty = redmulty * -1;
+
+      if (greenx > 6 || greenx < 1) {
+        greenmult = greenmult * -1;
+        greeny = greeny + greenmulty;
+        cg1 = random(16);
+        cg2 = random(16);
+      }
+
+      if (redx > 6 || redx < 1) {
+        redmult = redmult * -1;
+
+        cr1 = random(16);
+        cr2 = random(16);
+      }
+
+      greenx = greenx + greenmult;
+      redy = redy + redmulty;
+      redx = redx + redmult;
+    }
+
+    for (counter=0; counter < 105; counter++) {
+      for (i=0; i < 8; i++) {
+        setLED(i, oredx, oredx, 0, 0, 0);
+        setLED(obluey, obluex, i, 0, 0, 0);
+        setLED(ogreenx, i, ogreeny, 0, 0, 0);
+      }
+      for (i=0; i < 8; i++) {
+        setLED(i, redx, redx, 15, 0, 0);
+        setLED(bluey, bluex, i, 0, 0, 15);
+        setLED(greenx, i, greeny, 0, 15, 0);
+      }
+      ogreenx = greenx;
+      ogreeny = greeny;
+      obluex = bluex;
+      obluey = bluey;
+      oredx = redx;
+      oredy = redy;
+
+      for (i=100; i > time_counter; i--) {
+        delay(1);
+      }
+
+      time_counter = time_counter + timemult;
+      if (time_counter > 100 || time_counter < 10) timemult = timemult * -1;
+      if (greeny > 6 || greeny < 1) greenmulty = greenmulty * -1;
+      if (bluey > 6 || bluey < 1) bluemulty = bluemulty * -1;
+      if (redy > 6 || redy < 1) redmulty = redmulty * -1;
+
+      if (greenx > 6 || greenx < 1) {
+        greenmult = greenmult * -1;
+        greeny = greeny + greenmulty;
+        cg1 = random(16);
+        cg2 = random(16);
+      }
+      if (bluex > 6 || bluex < 1) {
+        bluemult = bluemult * -1;
+        bluey = bluey + bluemulty;
+        cb1 = random(16);
+        cb2 = random(16);
+      }
+      if (redx > 6 || redx < 1) {
+        redmult = redmult * -1;
+        cr1 = random(16);
+        cr2 = random(16);
+      }
+
+      greenx = greenx + greenmult;
+      bluex = bluex + bluemult;
+      redy = redy + redmulty;
+      redx = redx + redmult;
     }
   }
 }
 
-void risingSweepRGB() {
+void risingSweepWhite(int duration, float speedMultiplier = 1.0) {
   int counter, i, j, k;
 
-  for (counter=0; counter < 1; counter++) {
-    for (i=0; i < 8; i++) {
-      for (j=0; j < 8; j++) {
-        for (k=0; k < 8; k++) {
-          setLED(i, j, k, 0, random(16), random(16));
+  start = millis();
+  while (millis() - start < duration) {
+    for (counter=0; counter < 3; counter++) {
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            setLED(i, j, k, 8, 15, 15);
+            // red too intense to make white at 15. Reduced to 8
+            // makes nice white level.
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            setLED(i, j, k, 0, 0, 0);
+            delay(getBeatDivision(speedMultiplier));
+          }
         }
       }
     }
+  }
+}
 
-    for (i=7;  i >= 0; i--) {
-      for (j=0;  j <8; j++) {
-        for (k=0;  k <8; k++) {
-          setLED(i, j, k, random(16), 0, random(16));
+void risingSweepRGB(int duration, float speedMultiplier = 1.0) {
+  int counter, i, j, k;
+
+  start = millis();
+  while (millis() - start < duration) {
+    for (counter=0; counter < 1; counter++) {
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
         }
       }
-    }
 
-    for (i=0; i < 8; i++) {
-      for (j=0; j < 8; j++) {
-        for (k=0; k < 8; k++) {
-          setLED(i, j, k, random(16), random(16), 0);
+      for (i=7;  i >= 0; i--) {
+        for (j=0;  j < 8; j++) {
+          for (k=0;  k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 0, color_value, 16 - color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
         }
       }
-    }
 
-    for (i=7; i >= 0; i--) {
-      for (j=0; j < 8; j++) {
-        for (k=0; k < 8; k++) {
-          setLED(i, j, k, random(16), 0, random(16));
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, color_value, 16 - color_value, 0);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 0, color_value, 16 - color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, color_value, 16 - color_value, 0);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 0, color_value, 16 - color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, color_value, 16 - color_value, 0);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 0, color_value, 16 - color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, color_value, 16 - color_value, 0);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+      for (i=7; i >= 0; i--) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
+        }
+      }
+
+
+
+
+      for (i=0; i < 8; i++) {
+        for (j=0; j < 8; j++) {
+          for (k=0; k < 8; k++) {
+            byte color_value = ((i + j + k) * 2) / 3;
+            setLED(i, j, k, 16 - color_value, 0, color_value);
+            delay(getBeatDivision(speedMultiplier));
+          }
         }
       }
     }
@@ -2243,6 +2372,10 @@ void loop() {
   // upDownArrows(getBeatDivision(32), DIVISOR_64);
   // clean();
   // tasteTheRainbow(getBeatDivision(32), DIVISOR_64);
+  // clean();
+  // risingSweepRGB(getBeatDivision(32), DIVISOR_64);
+  // clean();
+  // lineMovement(getBeatDivision(32));
   // clean();
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
