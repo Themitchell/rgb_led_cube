@@ -1359,12 +1359,10 @@ void sinwaveTwo() {
   }
 }
 
-void colorWheelVertical(float speedMultiplier = 1.0) {
+void colorWheelVertical(int duration, float speedMultiplier = 1.0) {
   int xx, yy, zz, ww;
   int rr = 1, gg = 1, bb = 1;
   int ranx, rany, swiper;
-
-  int duration = 10000;
 
   start = millis();
 
@@ -1419,12 +1417,10 @@ void colorWheelVertical(float speedMultiplier = 1.0) {
   }
 }
 
-void colorWheel(float speedMultiplier = 1.0) {
+void colorWheel(int duration, float speedMultiplier = 1.0) {
   int xx, yy, zz, ww;
   int rr = 1, gg = 1, bb = 1;
   int ranx, rany, ranz, select, swiper;
-
-  int duration = 10000;
 
   start = millis();
 
@@ -2194,11 +2190,11 @@ void clean() {
 }
 
 void loop() {
-  // colorWheelVertical(64);
+  // colorWheelVertical(getBeatDivision(16), FOURTH_DIVISION);
   // clean();
   // folder();
   // clean();
-  // colorWheel();
+  // colorWheel(getBeatDivision(16), FOURTH_DIVISION);
   // clean();
   // bouncyBalls();
   // clean();
