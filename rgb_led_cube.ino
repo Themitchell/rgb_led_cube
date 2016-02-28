@@ -45,6 +45,13 @@ int BAM_Bit, BAM_Counter = 0; // Keeps track of Bit Angle Modulation
 
 unsigned long start; // Millisecond timer to cycle through the animations
 
+const int CUBE_SIZE = 8
+const int TEMPO = 120; // bpm
+
+int getTempoDelay() {
+  return 60000 / TEMPO ;
+}
+
 void setup() {
   SPI.setBitOrder(MSBFIRST);            // Most Significant Bit First
   SPI.setDataMode(SPI_MODE0);           // Mode 0 Rising edge of data, keep clock low
@@ -2069,6 +2076,105 @@ void upDownArrows() {
       }
     }
   }
+}
+
+void generateOutline(int pause, int outlineSize, byte red, byte green, byte blue) {
+  int offset = int((8 - outlineSize) / 2);
+  int altOffset = 7 - offset;
+  int counter;
+
+  for (counter=0; counter < outlineSize; counter++) {
+    setLED(offset + counter,        offset,                   offset,                   red,  green,  blue);
+    setLED(offset,                  offset + counter,         offset,                   red,  green,  blue);
+    setLED(offset,                  offset,                   offset + counter,         red,  green,  blue);
+    setLED(altOffset - counter,     altOffset,                altOffset,                red,  green,  blue);
+    setLED(altOffset,               altOffset - counter,      altOffset,                red,  green,  blue);
+    setLED(altOffset,               altOffset,                altOffset - counter,      red,  green,  blue);
+
+    delay(pause);
+  }
+
+  for (counter=0; counter < outlineSize; counter++) {
+    setLED(altOffset - counter,     altOffset,                offset,                   red,  green,  blue);
+    setLED(offset + counter,        offset,                   altOffset,                red,  green,  blue);
+    setLED(altOffset,               offset,                   altOffset - counter,      red,  green,  blue);
+    setLED(offset,                  altOffset,                offset + counter,         red,  green,  blue);
+    setLED(altOffset,               offset + counter,         offset,                   red,  green,  blue);
+    setLED(offset,                  altOffset - counter,      altOffset,                red,  green,  blue);
+
+    delay(pause);
+  }
+}
+
+
+void outlineSlow() {
+  int pause = 150;
+
+  generateOutline(pause, 8, 0, 0, 15);
+  generateOutline(pause, 6, 0, 15, 0);
+  generateOutline(pause, 4, 15, 0, 0);
+  generateOutline(pause, 2, 0, 0, 15);
+
+  generateOutline(pause, 8, 0, 0, 0);
+  generateOutline(pause, 6, 0, 0, 0);
+  generateOutline(pause, 4, 0, 0, 0);
+  generateOutline(pause, 2, 0, 0, 0);
+
+  generateOutline(pause, 8, 15, 0, 0);
+  generateOutline(pause, 6, 0, 0, 15);
+  generateOutline(pause, 4, 0, 15, 0);
+  generateOutline(pause, 2, 15, 0, 0);
+
+  generateOutline(pause, 8, 0, 0, 0);
+  generateOutline(pause, 6, 0, 0, 0);
+  generateOutline(pause, 4, 0, 0, 0);
+  generateOutline(pause, 2, 0, 0, 0);
+
+  generateOutline(pause, 8, 0, 15, 0);
+  generateOutline(pause, 6, 15, 0, 0);
+  generateOutline(pause, 4, 0, 0, 15);
+  generateOutline(pause, 2, 0, 15, 0);
+}
+
+void cardboardBox() {
+  int pause = int(getTempoDelay() / 4);
+
+  generateOutline(0, 8, 0, 0, 15);
+  delay(pause);
+  generateOutline(0, 8, 0, 0, 0);
+  generateOutline(0, 6, 0, 3, 11);
+  delay(pause);
+  generateOutline(0, 6, 0, 0, 0);
+  generateOutline(0, 4, 0, 7, 7);
+  delay(pause);
+  generateOutline(0, 4, 0, 0, 0);
+  generateOutline(0, 2, 0, 11, 3);
+  delay(pause);
+  generateOutline(0, 2, 0, 0, 0);
+  generateOutline(0, 4, 0, 15, 0);
+  delay(pause);
+  generateOutline(0, 4, 0, 0, 0);
+  generateOutline(0, 6, 3, 11, 0);
+  delay(pause);
+  generateOutline(0, 6, 0, 0, 0);
+  generateOutline(0, 8, 7, 7, 0);
+  delay(pause);
+  generateOutline(0, 8, 0, 0, 0);
+  generateOutline(0, 6, 11, 3, 0);
+  delay(pause);
+  generateOutline(0, 6, 0, 0, 0);
+  generateOutline(0, 4, 15, 0, 0);
+  delay(pause);
+  generateOutline(0, 4, 0, 0, 0);
+  generateOutline(0, 2, 11, 0, 3);
+  delay(pause);
+  generateOutline(0, 2, 0, 0, 0);
+  generateOutline(0, 4, 7, 0, 7);
+  delay(pause);
+  generateOutline(0, 4, 0, 0, 0);
+  generateOutline(0, 6, 3, 0, 11);
+  delay(pause);
+  generateOutline(0, 6, 0, 0, 0);
 }
 
 void clean() {
