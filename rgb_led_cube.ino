@@ -2095,7 +2095,7 @@ void upDownArrows() {
   }
 }
 
-void generateOutline(int pause, int outlineSize, byte red, byte green, byte blue) {
+void generateOutline(int outlineSize, byte red, byte green, byte blue, float speedMultiplier = 1.0) {
   int offset = int((8 - outlineSize) / 2);
   int altOffset = 7 - offset;
   int counter;
@@ -2108,7 +2108,7 @@ void generateOutline(int pause, int outlineSize, byte red, byte green, byte blue
     setLED(altOffset,               altOffset - counter,      altOffset,                red,  green,  blue);
     setLED(altOffset,               altOffset,                altOffset - counter,      red,  green,  blue);
 
-    delay(pause);
+    delay(getBeatDivision(speedMultiplier));
   }
 
   for (counter=0; counter < outlineSize; counter++) {
@@ -2119,37 +2119,38 @@ void generateOutline(int pause, int outlineSize, byte red, byte green, byte blue
     setLED(altOffset,               offset + counter,         offset,                   red,  green,  blue);
     setLED(offset,                  altOffset - counter,      altOffset,                red,  green,  blue);
 
-    delay(pause);
+    delay(getBeatDivision(speedMultiplier));
   }
 }
 
-void outlineSlow() {
-  int pause = 150;
+void outline(int duration, float speedMultiplier = 1.0) {
+  start = millis();
+  while (millis() - start < duration) {
+    generateOutline(8, 0, 0, 15, speedMultiplier);
+    generateOutline(6, 0, 15, 0, speedMultiplier);
+    generateOutline(4, 15, 0, 0, speedMultiplier);
+    generateOutline(2, 0, 0, 15, speedMultiplier);
 
-  generateOutline(pause, 8, 0, 0, 15);
-  generateOutline(pause, 6, 0, 15, 0);
-  generateOutline(pause, 4, 15, 0, 0);
-  generateOutline(pause, 2, 0, 0, 15);
+    generateOutline(8, 0, 0, 0, speedMultiplier);
+    generateOutline(6, 0, 0, 0, speedMultiplier);
+    generateOutline(4, 0, 0, 0, speedMultiplier);
+    generateOutline(2, 0, 0, 0, speedMultiplier);
 
-  generateOutline(pause, 8, 0, 0, 0);
-  generateOutline(pause, 6, 0, 0, 0);
-  generateOutline(pause, 4, 0, 0, 0);
-  generateOutline(pause, 2, 0, 0, 0);
+    generateOutline(8, 15, 0, 0, speedMultiplier);
+    generateOutline(6, 0, 0, 15, speedMultiplier);
+    generateOutline(4, 0, 15, 0, speedMultiplier);
+    generateOutline(2, 15, 0, 0, speedMultiplier);
 
-  generateOutline(pause, 8, 15, 0, 0);
-  generateOutline(pause, 6, 0, 0, 15);
-  generateOutline(pause, 4, 0, 15, 0);
-  generateOutline(pause, 2, 15, 0, 0);
+    generateOutline(8, 0, 0, 0, speedMultiplier);
+    generateOutline(6, 0, 0, 0, speedMultiplier);
+    generateOutline(4, 0, 0, 0, speedMultiplier);
+    generateOutline(2, 0, 0, 0, speedMultiplier);
 
-  generateOutline(pause, 8, 0, 0, 0);
-  generateOutline(pause, 6, 0, 0, 0);
-  generateOutline(pause, 4, 0, 0, 0);
-  generateOutline(pause, 2, 0, 0, 0);
-
-  generateOutline(pause, 8, 0, 15, 0);
-  generateOutline(pause, 6, 15, 0, 0);
-  generateOutline(pause, 4, 0, 0, 15);
-  generateOutline(pause, 2, 0, 15, 0);
+    generateOutline(8, 0, 15, 0, speedMultiplier);
+    generateOutline(6, 15, 0, 0, speedMultiplier);
+    generateOutline(4, 0, 0, 15, speedMultiplier);
+    generateOutline(2, 0, 15, 0, speedMultiplier);
+  }
 }
 
 void cardboardBox(int duration, float speedMultiplier = 1.0) {
@@ -2212,9 +2213,11 @@ void loop() {
   // clean();
   // folder(getBeatDivision(16), DIVISOR_16);
   // clean();
-  sinewave(getBeatDivision(16), DIVISOR_16);
+  // sinewave(getBeatDivision(16), DIVISOR_16);
   // clean();
   // colorWheel(getBeatDivision(16), DIVISOR_4);
+  // clean();
+  // outline(getBeatDivision(16), DIVISOR_16);
   // clean();
   // bouncyBalls();
   // clean();
