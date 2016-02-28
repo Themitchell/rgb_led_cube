@@ -1725,17 +1725,21 @@ void risingSweepRGB() {
   }
 }
 
-void tasteTheRainbow() {
+void tasteTheRainbow(int duration, float speedMultiplier = 1.0) {
   int counter, i, j, k;
 
-  for (counter=0; counter < 20; counter++) {
-    for (k=0; k < 200; k++) {
-      setLED(random(8), random(8), random(8), random(16), random(16), 0);
-      setLED(random(8), random(8), random(8), random(16), 0,          random(16));
-      setLED(random(8), random(8), random(8), 0,          random(16), random(16));
-    }
-    for (k=0; k < 200; k++) {
-      setLED(random(8),random(8),random(8),0,0,0);
+  start = millis();
+  while (millis() - start < duration) {
+    for (counter=0; counter < 20; counter++) {
+      for (k=0; k < 200; k++) {
+        setLED(random(8), random(8), random(8), random(16), random(16), 0);
+        setLED(random(8), random(8), random(8), random(16), 0,          random(16));
+        setLED(random(8), random(8), random(8), 0,          random(16), random(16));
+        delay(getBeatDivision(speedMultiplier));
+      }
+      for (k=0; k < 200; k++) {
+        setLED(random(8), random(8), random(8), 0, 0, 0);
+      }
     }
   }
 }
@@ -2236,8 +2240,10 @@ void loop() {
   // clean();
   // snake(getBeatDivision(32), DIVISOR_16);
   // clean();
-  upDownArrows(getBeatDivision(32), DIVISOR_64);
-  clean();
+  // upDownArrows(getBeatDivision(32), DIVISOR_64);
+  // clean();
+  // tasteTheRainbow(getBeatDivision(32), DIVISOR_64);
+  // clean();
   // fireworks(20, 15, 0);
   // cardboardBox(getBeatDivision(32));
   // cardboardBox(getBeatDivision(16), DIVISOR_8);
