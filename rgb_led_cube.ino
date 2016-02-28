@@ -1276,7 +1276,7 @@ void snake() {
   }
 }
 
-void sinwave(int duration, float speedMultiplier = 1.0) {
+void sinewave(int duration, float speedMultiplier = 1.0) {
   int addr, addrt, colselect, select;
   int sinewavearray[8], sinewavearrayOLD[8], sinemult[8];
   int rr = 0, gg = 0, bb = 15;
@@ -2210,9 +2210,9 @@ void clean() {
 void loop() {
   // colorWheelVertical(getBeatDivision(16), DIVISOR_4);
   // clean();
-  folder(getBeatDivision(16), DIVISOR_16);
+  // folder(getBeatDivision(16), DIVISOR_16);
   // clean();
-  // sinewave(getBeatDivision(16), DIVISOR_4);
+  sinewave(getBeatDivision(16), DIVISOR_16);
   // clean();
   // colorWheel(getBeatDivision(16), DIVISOR_4);
   // clean();
